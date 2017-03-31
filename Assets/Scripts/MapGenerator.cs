@@ -6,18 +6,18 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour {
 
     private int width;
-    private int height;
+    private int length;
 
     private string seed;
     System.Random pseudoRandom;
 
-    int[,] map;
+    UnityEngine.Object[,] map;
 
     void Start()
     {
         width = 7;
-        height = 10;
-        map = new int[width, height];
+        length = 10;
+        map = new UnityEngine.Object[length, width];
         seed = Guid.NewGuid().ToString();
         RandomGenerateMap();
 
@@ -33,16 +33,47 @@ public class MapGenerator : MonoBehaviour {
     {
         pseudoRandom = new System.Random(seed.GetHashCode());
 
-        for(int y = 0; y< height; y++)
+        for(int y = 0; y< length; y++)
         {
-            if(pseudoRandom.Next(0,100) < 75)
-                map[(pseudoRandom.Next(0, width/2)), y] = 1;
+            //if(pseudoRandom.Next(0,100) < 75)
+            //    map[y, (pseudoRandom.Next(0, width / 2))] = 1;
+
+            //if (pseudoRandom.Next(0, 100) < 75)
+            //    map[y, width / 2] = (pseudoRandom.Next(0,2) == 1) ? 1:0;
+
+            //if (pseudoRandom.Next(0, 100) < 75)
+            //    map[y, pseudoRandom.Next(width / 2 + 1, width)] = 1;
 
             if (pseudoRandom.Next(0, 100) < 75)
-                map[width / 2, y] = (pseudoRandom.Next(0,2) == 1) ? 1:0;
+            {
+                int rand = pseudoRandom.Next(0, width / 2);
+                map[y, rand] = Instantiate(Resources.Load("TrollPad"), new Vector3(y, 0, rand), Quaternion.identity);
+                ((GameObject)map[y, rand]).GetComponent<TrollPad>().worldX = y;
+                ((GameObject)map[y, rand]).GetComponent<TrollPad>().worldY = rand;
+            }
+               
+
+            if (pseudoRandom.Next(0, 100) < 50)
+            {
+                int rand = pseudoRandom.Next(0, 2);
+                map[y, width / 2] = (rand == 1) ? Instantiate(Resources.Load("TrollPad"), new Vector3(y, 0, rand), Quaternion.identity) : null;
+                if(map[y, width/2] != null)
+                {
+                    ((GameObject)map[y, width / 2]).GetComponent<TrollPad>().worldX = y;
+                    ((GameObject)map[y, width / 2]).GetComponent<TrollPad>().worldY = width/2;
+                }
+
+            }
+                
 
             if (pseudoRandom.Next(0, 100) < 75)
-                map[pseudoRandom.Next(width / 2 + 1, width), y] = 1;
+            {
+                int rand = pseudoRandom.Next(width / 2 + 1, width);
+                map[y, rand] = Instantiate(Resources.Load("TrollPad"), new Vector3(y, 0, rand), Quaternion.identity);
+                ((GameObject)map[y, rand]).GetComponent<TrollPad>().worldX = y;
+                ((GameObject)map[y, rand]).GetComponent<TrollPad>().worldY = rand;
+            }
+
         }
     }
 
@@ -50,12 +81,12 @@ public class MapGenerator : MonoBehaviour {
 
     IEnumerator DrawPlatforms()
     {
-        for (int x = 0; x < width; x++)
+        for (int x = 0; x < length; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < width; y++)
             {
-                if(map[x,y] == 1)
-                Instantiate(Resources.Load("TrollPad"), new Vector3(x,0,y),Quaternion.identity);
+                //if(map[x,y] == 1)
+                    //Instantiate(Resources.Load("TrollPad"), new Vector3(x,0,y),Quaternion.identity);
                 yield return null; 
             }
         }
