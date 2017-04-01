@@ -51,7 +51,7 @@ public class BonusManager : MonoBehaviour
 
     private void RotateBonusIcon()
     {
-        bonusIcon.transform.Rotate(720.0f * Time.fixedDeltaTime, 0.0f, 0.0f);
+        bonusIcon.transform.Rotate(180.0f * Time.fixedDeltaTime, 0.0f, 0.0f);
     }
 
     private IEnumerator StartRotatingBonusIconWithDelay()

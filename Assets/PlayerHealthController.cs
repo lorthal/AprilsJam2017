@@ -18,7 +18,10 @@ public class PlayerHealthController : MonoBehaviour {
 		if(GameController.Instance.Player1.transform.position.y < -10 && playerHealth1 > 0)
         {
             playerHealth1--;
-            GameController.Instance.Player1.transform.position = GameController.Instance.Player1.GetComponent<PlayerController>().lastPlatform.transform.position;
+            Vector3 respawnPosition = GameController.Instance.Player1.GetComponent<PlayerController>().lastPlatform.transform.position;
+            respawnPosition.y += 2.0f;
+            GameController.Instance.Player1.transform.position = respawnPosition;
+            
         }
         else if(playerHealth1 == 0)
         {
@@ -27,7 +30,9 @@ public class PlayerHealthController : MonoBehaviour {
         if (GameController.Instance.Player2.transform.position.y < -10)
         {
             playerHealth2--;
-            GameController.Instance.Player2.transform.position = GameController.Instance.Player2.GetComponent<PlayerController>().lastPlatform.transform.position;
+            Vector3 respawnPosition = GameController.Instance.Player2.GetComponent<PlayerController>().lastPlatform.transform.position;
+            respawnPosition.y += 2.0f;
+            GameController.Instance.Player2.transform.position = respawnPosition;
         }
         else if (playerHealth2 == 0)
         {
