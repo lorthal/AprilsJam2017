@@ -30,7 +30,7 @@ public class BonusManager : MonoBehaviour
         int randomBonusId = Random.Range(0, bonusesPrefabs.Length);
         GameObject currentBonusObj = Instantiate(bonusesPrefabs[randomBonusId], transform);
         currentBonus = currentBonusObj.GetComponent<BonusBase>();
-        bonusIcon.GetComponentInChildren<Renderer>().material.mainTexture = currentBonus.bonusIconTexture;
+        bonusIcon.GetComponentInChildren<Renderer>().material = currentBonus.bonusIconMaterial;
         StartCoroutine("StartRotatingBonusIconWithDelay");
         Debug.Log(currentBonus.gameObject.name);
         switch (playerSelected)
