@@ -32,6 +32,11 @@ public class PlayerController : MonoBehaviour {
         }
     }
     public float controllsSensitivity = 1.0f;
+    public bool isStunned;
+    public static float stunRange = 5.0f;
+    public static float stunCooldown = 5.0f;
+    public static float stunDuration = 2.0f;
+    private bool stunUsed;
 
     public GameObject lastPlatform { get; private set; }
     public int lastPlatformNumber;
@@ -40,6 +45,8 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
         rb = GetComponent<Rigidbody>();
         isGrounded = true;
+        isStunned = false;
+        stunUsed = false;
     }
 	
 	// Update is called once per frame
@@ -52,84 +59,128 @@ public class PlayerController : MonoBehaviour {
 
     void Player1Input()
     {
-        Vector3 vel = new Vector3();
+        if (!isStunned)
+        {
+            Vector3 vel = new Vector3();
+            if ((Input.GetKey(KeyCode.UpArrow) || slideControlls) && vel.z <= maxHorizontal)
+            {
+                if (!inversedControlls)
+                    vel += transform.forward * speedHorizontal * controllsSensitivity;
+                else
+                    vel -= transform.forward * speedHorizontal;
+            }
+            if (Input.GetKey(KeyCode.DownArrow) && vel.z >= -maxHorizontal && !slideControlls)
+            {
+                if (!inversedControlls)
+                    vel -= transform.forward * speedHorizontal * controllsSensitivity;
+                else
+                    vel += transform.forward * speedHorizontal;
+            }
+            if (Input.GetKey(KeyCode.LeftArrow) && vel.x <= maxVertical)
+            {
+                if (!inversedControlls)
+                    vel -= transform.right * speedVertical * controllsSensitivity;
+                else
+                    vel += transform.right * speedVertical;
+            }
+            if (Input.GetKey(KeyCode.RightArrow) && vel.x >= -maxVertical)
+            {
+                if (!inversedControlls)
+                    vel += transform.right * speedVertical * controllsSensitivity;
+                else
+                    vel -= transform.right * speedVertical;
+            }
 
-        if ((Input.GetKey(KeyCode.UpArrow) || slideControlls) && vel.z <= maxHorizontal)
-        {
-            if (!inversedControlls)
-                vel += transform.forward * speedHorizontal * controllsSensitivity;
-            else
-                vel -= transform.forward * speedHorizontal;
-        }
-        if (Input.GetKey(KeyCode.DownArrow) && vel.z >= -maxHorizontal && !slideControlls)
-        {
-            if (!inversedControlls)
-                vel -= transform.forward * speedHorizontal * controllsSensitivity;
-            else
-                vel += transform.forward * speedHorizontal;
-        }
-        if (Input.GetKey(KeyCode.LeftArrow) && vel.x <= maxVertical)
-        {
-            if (!inversedControlls)
-                vel -= transform.right * speedVertical * controllsSensitivity;
-            else
-                vel += transform.right * speedVertical;
-        }
-        if (Input.GetKey(KeyCode.RightArrow) && vel.x >= -maxVertical)
-        {
-            if (!inversedControlls)
-                vel += transform.right * speedVertical * controllsSensitivity;
-            else
-                vel -= transform.right * speedVertical;
-        }
+            if (Input.GetKeyDown(KeyCode.RightControl) && isGrounded)
+            {
+                rb.AddForce(transform.up * jumpForce);
+            }
+            if (vel.magnitude >= .75f)
+                rb.AddForce(vel);
 
-        if (Input.GetKeyDown(KeyCode.RightControl) && isGrounded)
-        {
-            rb.AddForce(transform.up * jumpForce);
+            if (Input.GetKey(KeyCode.RightShift) && !stunUsed)
+                StartCoroutine("StunSecondPlayer");
         }
-        if (vel.magnitude >= .75f)
-            rb.AddForce(vel);
     }
 
     void Player2Input()
     {
-        Vector3 vel = new Vector3();
+        if (!isStunned)
+        {
+            Vector3 vel = new Vector3();
 
-        if ((Input.GetKey(KeyCode.W) || slideControlls) && vel.z <= maxHorizontal)
-        {
-            if (!inversedControlls)
-                vel += transform.forward * speedHorizontal * controllsSensitivity;
-            else
-                vel -= transform.forward * speedHorizontal;
+            if ((Input.GetKey(KeyCode.W) || slideControlls) && vel.z <= maxHorizontal)
+            {
+                if (!inversedControlls)
+                    vel += transform.forward * speedHorizontal * controllsSensitivity;
+                else
+                    vel -= transform.forward * speedHorizontal;
+            }
+            if (Input.GetKey(KeyCode.S) && vel.z >= -maxHorizontal && !slideControlls)
+            {
+                if (!inversedControlls)
+                    vel -= transform.forward * speedHorizontal * controllsSensitivity;
+                else
+                    vel += transform.forward * speedHorizontal;
+            }
+            if (Input.GetKey(KeyCode.A) && vel.x <= maxVertical)
+            {
+                if (!inversedControlls)
+                    vel -= transform.right * speedVertical * controllsSensitivity;
+                else
+                    vel += transform.right * speedVertical;
+            }
+            if (Input.GetKey(KeyCode.D) && vel.x >= -maxVertical)
+            {
+                if (!inversedControlls)
+                    vel += transform.right * speedVertical * controllsSensitivity;
+                else
+                    vel -= transform.right * speedVertical;
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftControl) && isGrounded)
+            {
+                rb.AddForce(transform.up * jumpForce);
+            }
+            if (vel.magnitude >= .75f)
+                rb.AddForce(vel);
+
+            if (Input.GetKey(KeyCode.LeftShift) && !stunUsed)
+                StartCoroutine("StunSecondPlayer");
         }
-        if (Input.GetKey(KeyCode.S) && vel.z >= -maxHorizontal && !slideControlls)
+    }
+
+    private IEnumerator StunSecondPlayer()
+    {
+        if (Vector3.Distance(gameObject.transform.position, GameController.Instance.Player2.transform.position) <= stunRange)
         {
-            if (!inversedControlls)
-                vel -= transform.forward * speedHorizontal * controllsSensitivity;
-            else
-                vel += transform.forward * speedHorizontal;
+            stunUsed = true;
+            StartCoroutine("StunPlayerForSeconds");
         }
-        if (Input.GetKey(KeyCode.A) && vel.x <= maxVertical)
+        yield return new WaitForSeconds(stunCooldown);
+        stunUsed = false;
+    }
+
+    private IEnumerator StunPlayerForSeconds()
+    {
+        if (Player1)
         {
-            if (!inversedControlls)
-                vel -= transform.right * speedVertical * controllsSensitivity;
-            else
-                vel += transform.right * speedVertical;
+            GameController.Instance.Player2.GetComponent<PlayerController>().isStunned = true;
         }
-        if (Input.GetKey(KeyCode.D) && vel.x >= -maxVertical)
+        else
         {
-            if (!inversedControlls)
-                vel += transform.right * speedVertical * controllsSensitivity;
-            else
-                vel -= transform.right * speedVertical;
+            GameController.Instance.Player1.GetComponent<PlayerController>().isStunned = true;
+        }
+        yield return new WaitForSeconds(stunDuration);
+        if (Player1)
+        {
+            GameController.Instance.Player2.GetComponent<PlayerController>().isStunned = false;
+        }
+        else
+        {
+            GameController.Instance.Player1.GetComponent<PlayerController>().isStunned = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl) && isGrounded)
-        {
-            rb.AddForce(transform.up * jumpForce);
-        }
-        if (vel.magnitude >= .75f)
-            rb.AddForce(vel);
     }
 
     private void OnCollisionEnter(Collision collision)
