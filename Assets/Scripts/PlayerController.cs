@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public Rigidbody Rb { get; private set; }
-    private bool isGrounded;
+    public bool isGrounded { get; private set; }
 
     public float speedVertical;
     public float speedHorizontal;
