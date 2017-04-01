@@ -37,7 +37,7 @@ public class PseudoMapGenerator : MonoBehaviour
 
     void Update()
     {
-        if (GameController.Instance.Player1.GetComponent<PlayerController>().isActiveAndEnabled && GameController.Instance.Player2.GetComponent<PlayerController>().isActiveAndEnabled)
+        if (GameController.Instance.Player1 != null && GameController.Instance.Player2 != null)
         {
             if (GameController.Instance.Player1.GetComponent<PlayerController>().lastPlatformNumber <
                         GameController.Instance.Player2.GetComponent<PlayerController>().lastPlatformNumber)
