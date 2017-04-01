@@ -196,17 +196,17 @@ public class PlayerController : MonoBehaviour {
         pushUsed = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        if(collision.collider.gameObject.tag == "Ground")
+        if(other.gameObject.tag == "Ground")
         {
             isGrounded = true;
-            lastPlatform = collision.gameObject;
+            lastPlatform = other.gameObject;
         }
     }
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.collider.gameObject.tag == "Ground")
+        if (other.gameObject.tag == "Ground")
         {
             isGrounded = false;
         }
