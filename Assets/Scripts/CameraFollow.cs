@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour {
-
+public class CameraFollow : MonoBehaviour
+{
     public GameObject player;
 
     private Vector3 offset;
@@ -15,5 +15,6 @@ public class CameraFollow : MonoBehaviour {
 
     void Update () {
         transform.position = player.transform.position + offset;
+        transform.LookAt(player.transform);
 	}
 }
