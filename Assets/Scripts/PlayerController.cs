@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
         {
             slideControlls = value;
             if (slideControlls)
-                controllsSensitivity = 0.1f;
+                controllsSensitivity = 0.5f;
             else
                 controllsSensitivity = 1.0f;
         }
@@ -54,14 +54,14 @@ public class PlayerController : MonoBehaviour {
     {
         Vector3 vel = new Vector3();
 
-        if (Input.GetKey(KeyCode.UpArrow) && vel.z <= maxHorizontal)
+        if ((Input.GetKey(KeyCode.UpArrow) || slideControlls) && vel.z <= maxHorizontal)
         {
             if (!inversedControlls)
                 vel += transform.forward * speedHorizontal * controllsSensitivity;
             else
                 vel -= transform.forward * speedHorizontal;
         }
-        if (Input.GetKey(KeyCode.DownArrow) && vel.z >= -maxHorizontal)
+        if (Input.GetKey(KeyCode.DownArrow) && vel.z >= -maxHorizontal && !slideControlls)
         {
             if (!inversedControlls)
                 vel -= transform.forward * speedHorizontal * controllsSensitivity;
@@ -95,37 +95,35 @@ public class PlayerController : MonoBehaviour {
     {
         Vector3 vel = new Vector3();
 
-        if (!slideControlls)
+        if ((Input.GetKey(KeyCode.W) || slideControlls) && vel.z <= maxHorizontal)
         {
-            if (Input.GetKey(KeyCode.W) && vel.z <= maxHorizontal)
-            {
-                if (!inversedControlls)
-                    vel += transform.forward * speedHorizontal * controllsSensitivity;
-                else
-                    vel -= transform.forward * speedHorizontal;
-            }
-            if (Input.GetKey(KeyCode.S) && vel.z >= -maxHorizontal)
-            {
-                if (!inversedControlls)
-                    vel -= transform.forward * speedHorizontal * controllsSensitivity;
-                else
-                    vel += transform.forward * speedHorizontal;
-            }
-            if (Input.GetKey(KeyCode.A) && vel.x <= maxVertical)
-            {
-                if (!inversedControlls)
-                    vel -= transform.right * speedVertical * controllsSensitivity;
-                else
-                    vel += transform.right * speedVertical;
-            }
-            if (Input.GetKey(KeyCode.D) && vel.x >= -maxVertical)
-            {
-                if (!inversedControlls)
-                    vel += transform.right * speedVertical * controllsSensitivity;
-                else
-                    vel -= transform.right * speedVertical;
-            }
+            if (!inversedControlls)
+                vel += transform.forward * speedHorizontal * controllsSensitivity;
+            else
+                vel -= transform.forward * speedHorizontal;
         }
+        if (Input.GetKey(KeyCode.S) && vel.z >= -maxHorizontal && !slideControlls)
+        {
+            if (!inversedControlls)
+                vel -= transform.forward * speedHorizontal * controllsSensitivity;
+            else
+                vel += transform.forward * speedHorizontal;
+        }
+        if (Input.GetKey(KeyCode.A) && vel.x <= maxVertical)
+        {
+            if (!inversedControlls)
+                vel -= transform.right * speedVertical * controllsSensitivity;
+            else
+                vel += transform.right * speedVertical;
+        }
+        if (Input.GetKey(KeyCode.D) && vel.x >= -maxVertical)
+        {
+            if (!inversedControlls)
+                vel += transform.right * speedVertical * controllsSensitivity;
+            else
+                vel -= transform.right * speedVertical;
+        }
+
         if (Input.GetKeyDown(KeyCode.LeftControl) && isGrounded)
         {
             rb.AddForce(transform.up * jumpForce);
