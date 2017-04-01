@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour {
         if (vel.magnitude >= .75f)
             Rb.AddForce(vel);
 
-        if (Input.GetKey(KeyCode.RightShift) && !pushUsed)
+        if ((Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.JoystickButton1)) && !pushUsed)
             StartCoroutine("PushSecondPlayer");
     }
 
