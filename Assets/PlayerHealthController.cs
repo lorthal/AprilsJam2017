@@ -8,6 +8,9 @@ public class PlayerHealthController : MonoBehaviour {
     public int playerHealth1 { get; private set; }
     public int playerHealth2 { get; private set; }
 
+    public HeartDestroyer heartDestroyer1;
+    public HeartDestroyer heartDestroyer2;
+
     private void Start()
     {
         playerHealth1 = 5;
@@ -24,6 +27,7 @@ public class PlayerHealthController : MonoBehaviour {
                 respawnPosition.y += 2.0f;
                 GameController.Instance.Player1.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 GameController.Instance.Player1.transform.position = respawnPosition;
+                heartDestroyer1.DestroyHeart();
 
             }
             else if (playerHealth1 == 0)
@@ -40,6 +44,7 @@ public class PlayerHealthController : MonoBehaviour {
                 respawnPosition.y += 2.0f;
                 GameController.Instance.Player2.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 GameController.Instance.Player2.transform.position = respawnPosition;
+                heartDestroyer2.DestroyHeart();
             }
             else if (playerHealth2 == 0)
             {
