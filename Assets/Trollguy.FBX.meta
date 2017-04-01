@@ -1,0 +1,348 @@
+fileFormatVersion: 2
+guid: cab0269785bc989499a4f693017098cc
+timeCreated: 1491063346
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Be00
+    100002: Be01
+    100004: Be02
+    100006: Be03
+    100008: Be04
+    100010: Be05
+    100012: Be06
+    100014: Bone001
+    100016: Bone003
+    100018: Bone003(mirrored)
+    100020: Bone005
+    100022: Bone005(mirrored)
+    100024: Bone007
+    100026: Bone007(mirrored)
+    100028: Bone009
+    100030: Bone010
+    100032: Bone011
+    100034: Bone011(mirrored)
+    100036: Bone012
+    100038: Bone013
+    100040: Bone014
+    100042: Bone014(mirrored)
+    100044: Bone015
+    100046: Bone016
+    100048: Dummy001
+    100050: Dummy002
+    100052: Dummy003
+    100054: Dummy004
+    100056: IK Chain001
+    100058: IK Chain002
+    100060: TrollBody
+    100062: TrollFace
+    100064: //RootNode
+    100066: TrollTooth00
+    100068: TrollTooth01
+    100070: TrollTooth02
+    100072: TrollTooth03
+    100074: TrollTooth04
+    100076: TrollTooth05
+    100078: TrollTooth06
+    100080: TrollTooth07
+    100082: TrollTooth08
+    100084: TrollTooth09
+    100086: TrollTooth10
+    100088: TrollTooth11
+    100090: TrollTooth12
+    100092: TrollTooth13
+    100094: TrollTooth14
+    400000: Be00
+    400002: Be01
+    400004: Be02
+    400006: Be03
+    400008: Be04
+    400010: Be05
+    400012: Be06
+    400014: Bone001
+    400016: Bone003
+    400018: Bone003(mirrored)
+    400020: Bone005
+    400022: Bone005(mirrored)
+    400024: Bone007
+    400026: Bone007(mirrored)
+    400028: Bone009
+    400030: Bone010
+    400032: Bone011
+    400034: Bone011(mirrored)
+    400036: Bone012
+    400038: Bone013
+    400040: Bone014
+    400042: Bone014(mirrored)
+    400044: Bone015
+    400046: Bone016
+    400048: Dummy001
+    400050: Dummy002
+    400052: Dummy003
+    400054: Dummy004
+    400056: IK Chain001
+    400058: IK Chain002
+    400060: TrollBody
+    400062: TrollFace
+    400064: //RootNode
+    400066: TrollTooth00
+    400068: TrollTooth01
+    400070: TrollTooth02
+    400072: TrollTooth03
+    400074: TrollTooth04
+    400076: TrollTooth05
+    400078: TrollTooth06
+    400080: TrollTooth07
+    400082: TrollTooth08
+    400084: TrollTooth09
+    400086: TrollTooth10
+    400088: TrollTooth11
+    400090: TrollTooth12
+    400092: TrollTooth13
+    400094: TrollTooth14
+    2300000: TrollFace
+    2300002: TrollTooth00
+    2300004: TrollTooth01
+    2300006: TrollTooth02
+    2300008: TrollTooth03
+    2300010: TrollTooth04
+    2300012: TrollTooth05
+    2300014: TrollTooth06
+    2300016: TrollTooth07
+    2300018: TrollTooth08
+    2300020: TrollTooth09
+    2300022: TrollTooth10
+    2300024: TrollTooth11
+    2300026: TrollTooth12
+    2300028: TrollTooth13
+    2300030: TrollTooth14
+    3300000: TrollFace
+    3300002: TrollTooth00
+    3300004: TrollTooth01
+    3300006: TrollTooth02
+    3300008: TrollTooth03
+    3300010: TrollTooth04
+    3300012: TrollTooth05
+    3300014: TrollTooth06
+    3300016: TrollTooth07
+    3300018: TrollTooth08
+    3300020: TrollTooth09
+    3300022: TrollTooth10
+    3300024: TrollTooth11
+    3300026: TrollTooth12
+    3300028: TrollTooth13
+    3300030: TrollTooth14
+    4300000: TrollBody
+    4300002: TrollFace
+    4300004: TrollTooth14
+    4300006: TrollTooth13
+    4300008: TrollTooth12
+    4300010: TrollTooth11
+    4300012: TrollTooth10
+    4300014: TrollTooth09
+    4300016: TrollTooth08
+    4300018: TrollTooth07
+    4300020: TrollTooth06
+    4300022: TrollTooth05
+    4300024: TrollTooth04
+    4300026: TrollTooth03
+    4300028: TrollTooth02
+    4300030: TrollTooth01
+    4300032: TrollTooth00
+    7400000: trollbody_anim
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: TrollBody
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: trollbody_anim
+      takeName: trollbody_anim
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bone001
+        weight: 1
+      - path: Bone001/Bone005
+        weight: 1
+      - path: Bone001/Bone005/Bone011
+        weight: 1
+      - path: Bone001/Bone005/Bone011/Be00
+        weight: 1
+      - path: Bone001/Bone005/Bone011/Be03
+        weight: 1
+      - path: Bone001/Bone005/Bone011/Bone007
+        weight: 1
+      - path: Bone001/Bone005(mirrored)
+        weight: 1
+      - path: Bone001/Bone005(mirrored)/Bone011(mirrored)
+        weight: 1
+      - path: Bone001/Bone005(mirrored)/Bone011(mirrored)/Be01
+        weight: 1
+      - path: Bone001/Bone005(mirrored)/Bone011(mirrored)/Be02
+        weight: 1
+      - path: Bone001/Bone005(mirrored)/Bone011(mirrored)/Bone007(mirrored)
+        weight: 1
+      - path: Bone001/Bone010
+        weight: 1
+      - path: Bone001/Bone010/Bone013
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone003
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone003/Bone015
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone003/Bone015/Bone014
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone003/Bone015/Bone014/Be05
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone003(mirrored)
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone003(mirrored)/Bone016
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone003(mirrored)/Bone016/Bone014(mirrored)
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone003(mirrored)/Bone016/Bone014(mirrored)/Be06
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009/Be04
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009/TrollFace
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009/TrollFace/TrollTooth00
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009/TrollFace/TrollTooth01
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009/TrollFace/TrollTooth02
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009/TrollFace/TrollTooth03
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009/TrollFace/TrollTooth04
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009/TrollFace/TrollTooth05
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009/TrollFace/TrollTooth06
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009/TrollFace/TrollTooth07
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009/TrollFace/TrollTooth08
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009/TrollFace/TrollTooth09
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009/TrollFace/TrollTooth10
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009/TrollFace/TrollTooth11
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009/TrollFace/TrollTooth12
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009/TrollFace/TrollTooth13
+        weight: 1
+      - path: Bone001/Bone010/Bone013/Bone012/Bone009/TrollFace/TrollTooth14
+        weight: 1
+      - path: Dummy001
+        weight: 1
+      - path: Dummy002
+        weight: 1
+      - path: Dummy003
+        weight: 1
+      - path: Dummy004
+        weight: 1
+      - path: IK Chain001
+        weight: 1
+      - path: IK Chain002
+        weight: 1
+      - path: TrollBody
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: Bone001
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
