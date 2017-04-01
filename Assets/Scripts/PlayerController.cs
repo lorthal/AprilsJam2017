@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour {
     public float maxHorizontal;
     public float jumpForce;
     public bool Player1;
+
+    #region Bonuses fields
     public bool inversedControlls;
     private bool slideControlls;
     public bool SlideControlls
@@ -32,10 +34,14 @@ public class PlayerController : MonoBehaviour {
         }
     }
     public float controllsSensitivity = 1.0f;
+
+    //Push ability
     public static float pushRange = 2.0f;
     public static float pushCooldown = 5.0f;
     public static float pushForce = 10.0f;
     private bool pushUsed;
+    public bool inversedPush;
+    #endregion
 
     public GameObject lastPlatform { get; private set; }
     public int lastPlatformNumber;
@@ -45,6 +51,7 @@ public class PlayerController : MonoBehaviour {
         Rb = GetComponent<Rigidbody>();
         isGrounded = true;
         pushUsed = false;
+        inversedPush = false;
     }
 	
 	// Update is called once per frame
@@ -151,18 +158,38 @@ public class PlayerController : MonoBehaviour {
             if (Player1)
             {
                 relativeTargetPosition = transform.InverseTransformPoint(GameController.Instance.Player2.transform.position);
-                if(relativeTargetPosition.x>0.0f)
-                    GameController.Instance.Player2.GetComponent<PlayerController>().Rb.AddForce(GameController.Instance.Player2.transform.right * pushForce, ForceMode.Impulse);
+                if(!inversedPush)
+                {
+                    if (relativeTargetPosition.x > 0.0f)
+                        GameController.Instance.Player2.GetComponent<PlayerController>().Rb.AddForce(GameController.Instance.Player2.transform.right * pushForce, ForceMode.Impulse);
+                    else
+                        GameController.Instance.Player2.GetComponent<PlayerController>().Rb.AddForce(-GameController.Instance.Player2.transform.right * pushForce, ForceMode.Impulse);
+                }
                 else
-                    GameController.Instance.Player2.GetComponent<PlayerController>().Rb.AddForce(-GameController.Instance.Player2.transform.right * pushForce, ForceMode.Impulse);
+                {
+                    if (relativeTargetPosition.x > 0.0f)
+                        GameController.Instance.Player1.GetComponent<PlayerController>().Rb.AddForce(-GameController.Instance.Player1.transform.right * pushForce, ForceMode.Impulse);
+                    else
+                        GameController.Instance.Player1.GetComponent<PlayerController>().Rb.AddForce(GameController.Instance.Player1.transform.right * pushForce, ForceMode.Impulse);
+                }
             }
             else
             {
                 relativeTargetPosition = transform.InverseTransformPoint(GameController.Instance.Player1.transform.position);
-                if (relativeTargetPosition.x > 0.0f)
-                    GameController.Instance.Player1.GetComponent<PlayerController>().Rb.AddForce(GameController.Instance.Player1.transform.right * pushForce, ForceMode.Impulse);
+                if (!inversedPush)
+                {
+                    if (relativeTargetPosition.x > 0.0f)
+                        GameController.Instance.Player1.GetComponent<PlayerController>().Rb.AddForce(GameController.Instance.Player1.transform.right * pushForce, ForceMode.Impulse);
+                    else
+                        GameController.Instance.Player1.GetComponent<PlayerController>().Rb.AddForce(-GameController.Instance.Player1.transform.right * pushForce, ForceMode.Impulse);
+                }
                 else
-                    GameController.Instance.Player1.GetComponent<PlayerController>().Rb.AddForce(-GameController.Instance.Player1.transform.right * pushForce, ForceMode.Impulse);
+                {
+                    if (relativeTargetPosition.x > 0.0f)
+                        GameController.Instance.Player2.GetComponent<PlayerController>().Rb.AddForce(-GameController.Instance.Player2.transform.right * pushForce, ForceMode.Impulse);
+                    else
+                        GameController.Instance.Player2.GetComponent<PlayerController>().Rb.AddForce(GameController.Instance.Player2.transform.right * pushForce, ForceMode.Impulse);
+                }
             }
         }
         yield return new WaitForSeconds(pushCooldown);
