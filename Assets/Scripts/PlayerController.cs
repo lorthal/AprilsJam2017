@@ -80,14 +80,14 @@ public class PlayerController : MonoBehaviour {
             else
                 vel += transform.forward * speedHorizontal;
         }
-        if (Input.GetKey(KeyCode.RightArrow) && vel.x <= maxVertical)
+        if (Input.GetKey(KeyCode.LeftArrow) && vel.x <= maxVertical)
         {
             if (!inversedControlls)
                 vel -= transform.right * speedVertical * controllsSensitivity;
             else
                 vel += transform.right * speedVertical;
         }
-        if (Input.GetKey(KeyCode.LeftArrow) && vel.x >= -maxVertical)
+        if (Input.GetKey(KeyCode.RightArrow) && vel.x >= -maxVertical)
         {
             if (!inversedControlls)
                 vel += transform.right * speedVertical * controllsSensitivity;
