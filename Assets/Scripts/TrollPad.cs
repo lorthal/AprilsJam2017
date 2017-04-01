@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class TrollPad : MonoBehaviour {
 
-    public event EventHandler OnPlayerStepOnPad;
+    public EventHandler OnPlayerStepOnPad;
 
-    public int worldX {
+    public int Row {
         get { return posX; }
         set {
             posX = value;
             transform.position = new Vector3(posX * GetComponent<Collider>().bounds.size.x, transform.position.y, transform.position.z); }
     }
-    public int worldY
+    public int Length
     {
         get { return posY; }
         set {
@@ -46,6 +46,6 @@ public class TrollPad : MonoBehaviour {
 
     public void PlayerStepOnPad()
     {
-        OnPlayerStepOnPad(this, new EventArgs());
+        GameController.Instance.Player1.GetComponent<PlayerController>().lastPlatformNumber = Length;
     }
 }
