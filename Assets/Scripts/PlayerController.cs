@@ -66,28 +66,28 @@ public class PlayerController : MonoBehaviour {
     {
         Vector3 vel = new Vector3();
 
-        if ((Input.GetKey(KeyCode.W) || slideControlls) && vel.z <= maxHorizontal)
+        if ((Input.GetKey(KeyCode.UpArrow) || slideControlls) && vel.z <= maxHorizontal)
         {
             if (!inversedControlls)
                 vel += transform.forward * speedHorizontal * controllsSensitivity;
             else
                 vel -= transform.forward * speedHorizontal;
         }
-        if (Input.GetKey(KeyCode.S) && vel.z >= -maxHorizontal && !slideControlls)
+        if (Input.GetKey(KeyCode.DownArrow) && vel.z >= -maxHorizontal && !slideControlls)
         {
             if (!inversedControlls)
                 vel -= transform.forward * speedHorizontal * controllsSensitivity;
             else
                 vel += transform.forward * speedHorizontal;
         }
-        if (Input.GetKey(KeyCode.A) && vel.x <= maxVertical)
+        if (Input.GetKey(KeyCode.RightArrow) && vel.x <= maxVertical)
         {
             if (!inversedControlls)
                 vel -= transform.right * speedVertical * controllsSensitivity;
             else
                 vel += transform.right * speedVertical;
         }
-        if (Input.GetKey(KeyCode.D) && vel.x >= -maxVertical)
+        if (Input.GetKey(KeyCode.LeftArrow) && vel.x >= -maxVertical)
         {
             if (!inversedControlls)
                 vel += transform.right * speedVertical * controllsSensitivity;
@@ -102,35 +102,35 @@ public class PlayerController : MonoBehaviour {
         if (vel.magnitude >= .75f)
             Rb.AddForce(vel);
 
-        if (Input.GetKey(KeyCode.E) && !pushUsed)
+        if (Input.GetKey(KeyCode.LeftControl) && !pushUsed)
             StartCoroutine("PushSecondPlayer");
     }
 
     void Player2Input()
     {
         Vector3 vel = new Vector3();
-        if ((Input.GetKey(KeyCode.UpArrow) || (Input.GetAxis("VerticalJoystick") > 0.0f) || slideControlls) && vel.z <= maxHorizontal)
+        if ((Input.GetKey(KeyCode.W) || (Input.GetAxis("VerticalJoystick") > 0.0f) || slideControlls) && vel.z <= maxHorizontal)
         {
             if (!inversedControlls)
                 vel += transform.forward * speedHorizontal * controllsSensitivity;
             else
                 vel -= transform.forward * speedHorizontal;
         }
-        if ((Input.GetKey(KeyCode.DownArrow) || Input.GetAxis("VerticalJoystick") < 0.0f) && vel.z >= -maxHorizontal && !slideControlls)
+        if ((Input.GetKey(KeyCode.S) || Input.GetAxis("VerticalJoystick") < 0.0f) && vel.z >= -maxHorizontal && !slideControlls)
         {
             if (!inversedControlls)
                 vel -= transform.forward * speedHorizontal * controllsSensitivity;
             else
                 vel += transform.forward * speedHorizontal;
         }
-        if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("HorizontalJoystick") < 0.0f) && vel.x <= maxVertical)
+        if ((Input.GetKey(KeyCode.A) || Input.GetAxis("HorizontalJoystick") < 0.0f) && vel.x <= maxVertical)
         {
             if (!inversedControlls)
                 vel -= transform.right * speedVertical * controllsSensitivity;
             else
                 vel += transform.right * speedVertical;
         }
-        if ((Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("HorizontalJoystick") > 0.0f) && vel.x >= -maxVertical)
+        if ((Input.GetKey(KeyCode.D) || Input.GetAxis("HorizontalJoystick") > 0.0f) && vel.x >= -maxVertical)
         {
             if (!inversedControlls)
                 vel += transform.right * speedVertical * controllsSensitivity;
@@ -138,14 +138,14 @@ public class PlayerController : MonoBehaviour {
                 vel -= transform.right * speedVertical;
         }
 
-        if ((Input.GetKeyDown(KeyCode.RightControl) || Input.GetKey(KeyCode.JoystickButton0)) && isGrounded)
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.JoystickButton0)) && isGrounded)
         {
             Rb.AddForce(transform.up * jumpForce);
         }
         if (vel.magnitude >= .75f)
             Rb.AddForce(vel);
 
-        if ((Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.JoystickButton1)) && !pushUsed)
+        if ((Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.JoystickButton1)) && !pushUsed)
             StartCoroutine("PushSecondPlayer");
     }
 
