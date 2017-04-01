@@ -20,23 +20,25 @@ public class PlayerHealthController : MonoBehaviour {
             playerHealth1--;
             Vector3 respawnPosition = GameController.Instance.Player1.GetComponent<PlayerController>().lastPlatform.transform.position;
             respawnPosition.y += 2.0f;
+            GameController.Instance.Player1.GetComponent<Rigidbody>().velocity = Vector3.zero;
             GameController.Instance.Player1.transform.position = respawnPosition;
             
         }
         else if(playerHealth1 == 0)
         {
-            GameController.Instance.Player1.SetActive(false);
+            Destroy(GameController.Instance.Player1);
         }
         if (GameController.Instance.Player2.transform.position.y < -10)
         {
             playerHealth2--;
             Vector3 respawnPosition = GameController.Instance.Player2.GetComponent<PlayerController>().lastPlatform.transform.position;
             respawnPosition.y += 2.0f;
+            GameController.Instance.Player2.GetComponent<Rigidbody>().velocity = Vector3.zero;
             GameController.Instance.Player2.transform.position = respawnPosition;
         }
         else if (playerHealth2 == 0)
         {
-            GameController.Instance.Player2.SetActive(false);
+            Destroy(GameController.Instance.Player2);
         }
     }
 }
