@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    private Rigidbody rb;
+    public Rigidbody Rb { get; private set; }
     private bool isGrounded;
 
     public float speedVertical;
@@ -32,21 +32,19 @@ public class PlayerController : MonoBehaviour {
         }
     }
     public float controllsSensitivity = 1.0f;
-    public bool isStunned;
-    public static float stunRange = 5.0f;
-    public static float stunCooldown = 5.0f;
-    public static float stunDuration = 2.0f;
-    private bool stunUsed;
+    public static float pushRange = 2.0f;
+    public static float pushCooldown = 5.0f;
+    public static float pushForce = 10.0f;
+    private bool pushUsed;
 
     public GameObject lastPlatform { get; private set; }
     public int lastPlatformNumber;
 
 	// Use this for initialization
 	void Start () {
-        rb = GetComponent<Rigidbody>();
+        Rb = GetComponent<Rigidbody>();
         isGrounded = true;
-        isStunned = false;
-        stunUsed = false;
+        pushUsed = false;
     }
 	
 	// Update is called once per frame
@@ -59,128 +57,116 @@ public class PlayerController : MonoBehaviour {
 
     void Player1Input()
     {
-        if (!isStunned)
+        Vector3 vel = new Vector3();
+        if ((Input.GetKey(KeyCode.UpArrow) || slideControlls) && vel.z <= maxHorizontal)
         {
-            Vector3 vel = new Vector3();
-            if ((Input.GetKey(KeyCode.UpArrow) || slideControlls) && vel.z <= maxHorizontal)
-            {
-                if (!inversedControlls)
-                    vel += transform.forward * speedHorizontal * controllsSensitivity;
-                else
-                    vel -= transform.forward * speedHorizontal;
-            }
-            if (Input.GetKey(KeyCode.DownArrow) && vel.z >= -maxHorizontal && !slideControlls)
-            {
-                if (!inversedControlls)
-                    vel -= transform.forward * speedHorizontal * controllsSensitivity;
-                else
-                    vel += transform.forward * speedHorizontal;
-            }
-            if (Input.GetKey(KeyCode.LeftArrow) && vel.x <= maxVertical)
-            {
-                if (!inversedControlls)
-                    vel -= transform.right * speedVertical * controllsSensitivity;
-                else
-                    vel += transform.right * speedVertical;
-            }
-            if (Input.GetKey(KeyCode.RightArrow) && vel.x >= -maxVertical)
-            {
-                if (!inversedControlls)
-                    vel += transform.right * speedVertical * controllsSensitivity;
-                else
-                    vel -= transform.right * speedVertical;
-            }
-
-            if (Input.GetKeyDown(KeyCode.RightControl) && isGrounded)
-            {
-                rb.AddForce(transform.up * jumpForce);
-            }
-            if (vel.magnitude >= .75f)
-                rb.AddForce(vel);
-
-            if (Input.GetKey(KeyCode.RightShift) && !stunUsed)
-                StartCoroutine("StunSecondPlayer");
+            if (!inversedControlls)
+                vel += transform.forward * speedHorizontal * controllsSensitivity;
+            else
+                vel -= transform.forward * speedHorizontal;
         }
+        if (Input.GetKey(KeyCode.DownArrow) && vel.z >= -maxHorizontal && !slideControlls)
+        {
+            if (!inversedControlls)
+                vel -= transform.forward * speedHorizontal * controllsSensitivity;
+            else
+                vel += transform.forward * speedHorizontal;
+        }
+        if (Input.GetKey(KeyCode.LeftArrow) && vel.x <= maxVertical)
+        {
+            if (!inversedControlls)
+                vel -= transform.right * speedVertical * controllsSensitivity;
+            else
+                vel += transform.right * speedVertical;
+        }
+        if (Input.GetKey(KeyCode.RightArrow) && vel.x >= -maxVertical)
+        {
+            if (!inversedControlls)
+                vel += transform.right * speedVertical * controllsSensitivity;
+            else
+                vel -= transform.right * speedVertical;
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightControl) && isGrounded)
+        {
+            Rb.AddForce(transform.up * jumpForce);
+        }
+        if (vel.magnitude >= .75f)
+            Rb.AddForce(vel);
+
+        if (Input.GetKey(KeyCode.RightShift) && !pushUsed)
+            StartCoroutine("PushSecondPlayer");
     }
 
     void Player2Input()
     {
-        if (!isStunned)
+        Vector3 vel = new Vector3();
+
+        if ((Input.GetKey(KeyCode.W) || slideControlls) && vel.z <= maxHorizontal)
         {
-            Vector3 vel = new Vector3();
-
-            if ((Input.GetKey(KeyCode.W) || slideControlls) && vel.z <= maxHorizontal)
-            {
-                if (!inversedControlls)
-                    vel += transform.forward * speedHorizontal * controllsSensitivity;
-                else
-                    vel -= transform.forward * speedHorizontal;
-            }
-            if (Input.GetKey(KeyCode.S) && vel.z >= -maxHorizontal && !slideControlls)
-            {
-                if (!inversedControlls)
-                    vel -= transform.forward * speedHorizontal * controllsSensitivity;
-                else
-                    vel += transform.forward * speedHorizontal;
-            }
-            if (Input.GetKey(KeyCode.A) && vel.x <= maxVertical)
-            {
-                if (!inversedControlls)
-                    vel -= transform.right * speedVertical * controllsSensitivity;
-                else
-                    vel += transform.right * speedVertical;
-            }
-            if (Input.GetKey(KeyCode.D) && vel.x >= -maxVertical)
-            {
-                if (!inversedControlls)
-                    vel += transform.right * speedVertical * controllsSensitivity;
-                else
-                    vel -= transform.right * speedVertical;
-            }
-
-            if (Input.GetKeyDown(KeyCode.LeftControl) && isGrounded)
-            {
-                rb.AddForce(transform.up * jumpForce);
-            }
-            if (vel.magnitude >= .75f)
-                rb.AddForce(vel);
-
-            if (Input.GetKey(KeyCode.LeftShift) && !stunUsed)
-                StartCoroutine("StunSecondPlayer");
+            if (!inversedControlls)
+                vel += transform.forward * speedHorizontal * controllsSensitivity;
+            else
+                vel -= transform.forward * speedHorizontal;
         }
+        if (Input.GetKey(KeyCode.S) && vel.z >= -maxHorizontal && !slideControlls)
+        {
+            if (!inversedControlls)
+                vel -= transform.forward * speedHorizontal * controllsSensitivity;
+            else
+                vel += transform.forward * speedHorizontal;
+        }
+        if (Input.GetKey(KeyCode.A) && vel.x <= maxVertical)
+        {
+            if (!inversedControlls)
+                vel -= transform.right * speedVertical * controllsSensitivity;
+            else
+                vel += transform.right * speedVertical;
+        }
+        if (Input.GetKey(KeyCode.D) && vel.x >= -maxVertical)
+        {
+            if (!inversedControlls)
+                vel += transform.right * speedVertical * controllsSensitivity;
+            else
+                vel -= transform.right * speedVertical;
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl) && isGrounded)
+        {
+            Rb.AddForce(transform.up * jumpForce);
+        }
+        if (vel.magnitude >= .75f)
+            Rb.AddForce(vel);
+
+        if (Input.GetKey(KeyCode.LeftShift) && !pushUsed)
+            StartCoroutine("PushSecondPlayer");
     }
 
-    private IEnumerator StunSecondPlayer()
+    private IEnumerator PushSecondPlayer()
     {
-        if (Vector3.Distance(gameObject.transform.position, GameController.Instance.Player2.transform.position) <= stunRange)
+        if (Vector3.Distance(GameController.Instance.Player1.transform.position, GameController.Instance.Player2.transform.position) <= pushRange)
         {
-            stunUsed = true;
-            StartCoroutine("StunPlayerForSeconds");
+            Vector3 relativeTargetPosition;
+            pushUsed = true;
+            if (Player1)
+            {
+                relativeTargetPosition = transform.InverseTransformPoint(GameController.Instance.Player2.transform.position);
+                if(relativeTargetPosition.x>0.0f)
+                    GameController.Instance.Player2.GetComponent<PlayerController>().Rb.AddForce(GameController.Instance.Player2.transform.right * pushForce, ForceMode.Impulse);
+                else
+                    GameController.Instance.Player2.GetComponent<PlayerController>().Rb.AddForce(-GameController.Instance.Player2.transform.right * pushForce, ForceMode.Impulse);
+            }
+            else
+            {
+                relativeTargetPosition = transform.InverseTransformPoint(GameController.Instance.Player1.transform.position);
+                if (relativeTargetPosition.x > 0.0f)
+                    GameController.Instance.Player1.GetComponent<PlayerController>().Rb.AddForce(GameController.Instance.Player1.transform.right * pushForce, ForceMode.Impulse);
+                else
+                    GameController.Instance.Player1.GetComponent<PlayerController>().Rb.AddForce(-GameController.Instance.Player1.transform.right * pushForce, ForceMode.Impulse);
+            }
         }
-        yield return new WaitForSeconds(stunCooldown);
-        stunUsed = false;
-    }
-
-    private IEnumerator StunPlayerForSeconds()
-    {
-        if (Player1)
-        {
-            GameController.Instance.Player2.GetComponent<PlayerController>().isStunned = true;
-        }
-        else
-        {
-            GameController.Instance.Player1.GetComponent<PlayerController>().isStunned = true;
-        }
-        yield return new WaitForSeconds(stunDuration);
-        if (Player1)
-        {
-            GameController.Instance.Player2.GetComponent<PlayerController>().isStunned = false;
-        }
-        else
-        {
-            GameController.Instance.Player1.GetComponent<PlayerController>().isStunned = false;
-        }
-
+        yield return new WaitForSeconds(pushCooldown);
+        pushUsed = false;
     }
 
     private void OnCollisionEnter(Collision collision)
