@@ -17,7 +17,7 @@ public class BonusSlide : BonusBase
 
     public override void ApplyBonus(GameObject player)
     {
-        this.player = player;
+        base.ApplyBonus(player);
         playerRigidbody = player.GetComponent<Rigidbody>();
         playerController = player.GetComponent<PlayerController>();
         StartCoroutine("SlideForSeconds");
@@ -26,13 +26,18 @@ public class BonusSlide : BonusBase
     private IEnumerator SlideForSeconds()
     {
         playerController.enabled = false;
-        playerRigidbody.velocity = slideSpeed * player.transform.forward;
+        InvokeRepeating("Slide", 0.0f, Time.fixedDeltaTime);
         //InvokeRepeating("RotateWhileSliding", Time.fixedDeltaTime, Time.fixedDeltaTime);
         yield return new WaitForSeconds(duration);
         //CancelInvoke("RotateWhileSliding");
-        playerRigidbody.velocity = Vector3.zero;
+        CancelInvoke("Slide");
         playerController.enabled = true;
-        Destroy(gameObject);
+        Destroy(gameObject, duration);
+    }
+
+    private void Slide()
+    {
+        playerRigidbody.velocity = slideSpeed * player.transform.forward;
     }
 
     private void RotateWhileSliding()
