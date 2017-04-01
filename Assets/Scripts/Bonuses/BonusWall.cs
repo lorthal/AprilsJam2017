@@ -17,15 +17,19 @@ public class BonusWall : BonusBase
     public override void Activate(GameObject player)
     {
         base.Activate(player);
-        Vector3 boxPos = player.transform.position;
-        boxPos.y += wallVerticalOffset;
-        boxPos.z += wallHorizontalOffset;
-        box = Instantiate(boxPrefab, boxPos, player.transform.rotation);
+        if (this.player != null)
+        {
+            Vector3 boxPos = player.transform.position;
+            boxPos.y += wallVerticalOffset;
+            boxPos.z += wallHorizontalOffset;
+            box = Instantiate(boxPrefab, boxPos, player.transform.rotation);
+        }
     }
 
     public override void Deactivate()
     {
-        Destroy(box);
+        if(player!=null)
+            Destroy(box);
         base.Deactivate();
     }
 }

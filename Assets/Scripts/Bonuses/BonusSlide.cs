@@ -12,12 +12,14 @@ public class BonusSlide : BonusBase
     public override void Activate(GameObject player)
     {
         base.Activate(player);
-        playerController.SlideControlls = true;
+        if(this.player != null)
+            playerController.SlideControlls = true;
     }
 
     public override void Deactivate()
     {
-        playerController.SlideControlls = false;
+        if(player != null)
+            playerController.SlideControlls = false;
         base.Deactivate();
     }
 }

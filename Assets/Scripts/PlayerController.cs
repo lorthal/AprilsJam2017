@@ -65,49 +65,6 @@ public class PlayerController : MonoBehaviour {
     void Player1Input()
     {
         Vector3 vel = new Vector3();
-        if ((Input.GetKey(KeyCode.UpArrow) || slideControlls) && vel.z <= maxHorizontal)
-        {
-            if (!inversedControlls)
-                vel += transform.forward * speedHorizontal * controllsSensitivity;
-            else
-                vel -= transform.forward * speedHorizontal;
-        }
-        if (Input.GetKey(KeyCode.DownArrow) && vel.z >= -maxHorizontal && !slideControlls)
-        {
-            if (!inversedControlls)
-                vel -= transform.forward * speedHorizontal * controllsSensitivity;
-            else
-                vel += transform.forward * speedHorizontal;
-        }
-        if (Input.GetKey(KeyCode.LeftArrow) && vel.x <= maxVertical)
-        {
-            if (!inversedControlls)
-                vel -= transform.right * speedVertical * controllsSensitivity;
-            else
-                vel += transform.right * speedVertical;
-        }
-        if (Input.GetKey(KeyCode.RightArrow) && vel.x >= -maxVertical)
-        {
-            if (!inversedControlls)
-                vel += transform.right * speedVertical * controllsSensitivity;
-            else
-                vel -= transform.right * speedVertical;
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightControl) && isGrounded)
-        {
-            Rb.AddForce(transform.up * jumpForce);
-        }
-        if (vel.magnitude >= .75f)
-            Rb.AddForce(vel);
-
-        if (Input.GetKey(KeyCode.RightShift) && !pushUsed)
-            StartCoroutine("PushSecondPlayer");
-    }
-
-    void Player2Input()
-    {
-        Vector3 vel = new Vector3();
 
         if ((Input.GetKey(KeyCode.W) || slideControlls) && vel.z <= maxHorizontal)
         {
@@ -138,14 +95,57 @@ public class PlayerController : MonoBehaviour {
                 vel -= transform.right * speedVertical;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             Rb.AddForce(transform.up * jumpForce);
         }
         if (vel.magnitude >= .75f)
             Rb.AddForce(vel);
 
-        if (Input.GetKey(KeyCode.LeftShift) && !pushUsed)
+        if (Input.GetKey(KeyCode.E) && !pushUsed)
+            StartCoroutine("PushSecondPlayer");
+    }
+
+    void Player2Input()
+    {
+        Vector3 vel = new Vector3();
+        if ((Input.GetKey(KeyCode.UpArrow) || (Input.GetAxis("VerticalJoystick") > 0.0f) || slideControlls) && vel.z <= maxHorizontal)
+        {
+            if (!inversedControlls)
+                vel += transform.forward * speedHorizontal * controllsSensitivity;
+            else
+                vel -= transform.forward * speedHorizontal;
+        }
+        if ((Input.GetKey(KeyCode.DownArrow) || Input.GetAxis("VerticalJoystick") < 0.0f) && vel.z >= -maxHorizontal && !slideControlls)
+        {
+            if (!inversedControlls)
+                vel -= transform.forward * speedHorizontal * controllsSensitivity;
+            else
+                vel += transform.forward * speedHorizontal;
+        }
+        if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("HorizontalJoystick") < 0.0f) && vel.x <= maxVertical)
+        {
+            if (!inversedControlls)
+                vel -= transform.right * speedVertical * controllsSensitivity;
+            else
+                vel += transform.right * speedVertical;
+        }
+        if ((Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("HorizontalJoystick") > 0.0f) && vel.x >= -maxVertical)
+        {
+            if (!inversedControlls)
+                vel += transform.right * speedVertical * controllsSensitivity;
+            else
+                vel -= transform.right * speedVertical;
+        }
+
+        if ((Input.GetKeyDown(KeyCode.RightControl) || Input.GetKey(KeyCode.JoystickButton0)) && isGrounded)
+        {
+            Rb.AddForce(transform.up * jumpForce);
+        }
+        if (vel.magnitude >= .75f)
+            Rb.AddForce(vel);
+
+        if (Input.GetKey(KeyCode.RightShift) && !pushUsed)
             StartCoroutine("PushSecondPlayer");
     }
 

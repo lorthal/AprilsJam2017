@@ -12,12 +12,14 @@ public class BonusInversePush : BonusBase
     public override void Activate(GameObject player)
     {
         base.Activate(player);
-        playerController.inversedPush = true;
+        if(this.player!=null)
+            playerController.inversedPush = true;
     }
 
     public override void Deactivate()
     {
-        playerController.inversedPush = false;
+        if(player!=null)
+            playerController.inversedPush = false;
         base.Deactivate();
     }
 }

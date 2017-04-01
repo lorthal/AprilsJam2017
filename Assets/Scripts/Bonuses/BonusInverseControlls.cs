@@ -10,12 +10,14 @@ public class BonusInverseControlls : BonusBase
     public override void Activate(GameObject player)
     {
         base.Activate(player);
-        playerController.inversedControlls = true;
+        if(this.player!=null)
+            playerController.inversedControlls = true;
     }
 
     public override void Deactivate()
     {
-        playerController.inversedControlls = false;
+        if(player!=null)
+            playerController.inversedControlls = false;
         base.Deactivate();
     }
 }

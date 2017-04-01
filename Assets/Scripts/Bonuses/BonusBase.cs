@@ -10,7 +10,8 @@ public abstract class BonusBase : MonoBehaviour
     public virtual void Activate(GameObject player)
     {
         this.player = player;
-        playerController = player.GetComponent<PlayerController>();
+        if(this.player!=null)
+            playerController = player.GetComponent<PlayerController>();
     }
 
     public virtual void Deactivate()

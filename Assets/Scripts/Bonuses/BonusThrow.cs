@@ -7,7 +7,8 @@ public class BonusThrow : BonusBase
     public override void Activate(GameObject player)
     {
         base.Activate(player);
-        playerController.Rb.AddForce((player.transform.forward + player.transform.up) * throwForce, ForceMode.Impulse);
+        if(player!=null)
+            playerController.Rb.AddForce((player.transform.forward + player.transform.up) * throwForce, ForceMode.Impulse);
     }
 
     public override void Deactivate()
