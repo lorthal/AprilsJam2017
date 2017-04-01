@@ -1,22 +1,24 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BonusInverseControlls : BonusBase
 {
     private PlayerController playerController;
 
-    public override void ApplyBonus(GameObject player)
+    private void Awake()
     {
-        base.ApplyBonus(player);
-        playerController = player.GetComponent<PlayerController>();
-        StartCoroutine("InverseControllsForSeconds");
+        Name = "Inverse Controls";
     }
 
-    private IEnumerator InverseControllsForSeconds()
+    public override void Activate(GameObject player)
     {
+        base.Activate(player);
+        playerController = player.GetComponent<PlayerController>();
         playerController.inversedControlls = true;
-        yield return new WaitForSeconds(duration);
+    }
+
+    public override void Deactivate()
+    {
         playerController.inversedControlls = false;
-        Destroy(gameObject);
+        base.Deactivate();
     }
 }

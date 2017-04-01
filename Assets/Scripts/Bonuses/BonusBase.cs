@@ -3,12 +3,15 @@
 public abstract class BonusBase : MonoBehaviour
 {
     protected GameObject player;
+    public string Name { get; protected set; }
 
-    [Tooltip("Duration in seconds.")]
-    public float duration = 0.0f;
-
-    public virtual void ApplyBonus(GameObject player)
+    public virtual void Activate(GameObject player)
     {
         this.player = player;
+    }
+
+    public virtual void Deactivate()
+    {
+        Destroy(gameObject);
     }
 }

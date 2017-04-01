@@ -7,41 +7,37 @@ public class BonusSlide : BonusBase
     private Rigidbody playerRigidbody;
     private PlayerController playerController;
     public float slideSpeed = 10.0f;
-    public int numberOfSpins = 2;
+    public int numberOfSpins = 1;
     private float rotateSpeed;
+    private Quaternion previousPlayerRotation;
 
-    private void Start()
+    private void Awake()
     {
-        rotateSpeed = 360.0f * numberOfSpins / duration;
+        Name = "Slide";
+        rotateSpeed = 360.0f * numberOfSpins / BonusManager.Instance.timeBetweenBonusesChange;
     }
 
-    public override void ApplyBonus(GameObject player)
+    public override void Activate(GameObject player)
     {
-        base.ApplyBonus(player);
+        base.Activate(player);
         playerRigidbody = player.GetComponent<Rigidbody>();
         playerController = player.GetComponent<PlayerController>();
-        StartCoroutine("SlideForSeconds");
+        previousPlayerRotation = player.transform.rotation;
+        playerController.SlideControlls = true;
+        InvokeRepeating("Slide", 0.0f, Time.fixedDeltaTime);
     }
 
-    private IEnumerator SlideForSeconds()
+    public override void Deactivate()
     {
-        playerController.enabled = false;
-        InvokeRepeating("Slide", 0.0f, Time.fixedDeltaTime);
-        //InvokeRepeating("RotateWhileSliding", Time.fixedDeltaTime, Time.fixedDeltaTime);
-        yield return new WaitForSeconds(duration);
-        //CancelInvoke("RotateWhileSliding");
         CancelInvoke("Slide");
-        playerController.enabled = true;
-        Destroy(gameObject, duration);
+        transform.rotation = previousPlayerRotation;
+        playerController.SlideControlls = false;
+        base.Deactivate();
     }
 
     private void Slide()
     {
         playerRigidbody.velocity = slideSpeed * player.transform.forward;
-    }
-
-    private void RotateWhileSliding()
-    {
-        player.transform.Rotate(transform.up, rotateSpeed * Time.fixedDeltaTime);
+        //player.transform.Rotate(transform.up, rotateSpeed * Time.fixedDeltaTime);
     }
 }
