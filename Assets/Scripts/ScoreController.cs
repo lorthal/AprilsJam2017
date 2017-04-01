@@ -36,7 +36,7 @@ public class ScoreController : MonoBehaviour {
     {
         while (true)
         {
-            if (GameController.Instance.Player1.activeInHierarchy && GameController.Instance.Player2.activeInHierarchy)
+            if (GameController.Instance.Player1 != null && GameController.Instance.Player2 != null)
             {
                 playerDistance = Mathf.Abs(GameController.Instance.Player1.transform.position.z - GameController.Instance.Player2.transform.position.z);
                 score = (int)Mathf.Floor(playerDistance / platformSize);
@@ -51,13 +51,13 @@ public class ScoreController : MonoBehaviour {
                 
                 yield return new WaitForSeconds(1);
             }
-            else if(GameController.Instance.Player1.activeInHierarchy)
+            else if(GameController.Instance.Player1 != null)
             {
                 score = phc.playerHealth1;
                 player1ScoreValue += score;
                 yield return new WaitForSeconds(3);
             }
-            else if(GameController.Instance.Player2.activeInHierarchy)
+            else if(GameController.Instance.Player2 != null)
             {
                 score = phc.playerHealth2;
                 player2ScoreValue += score;

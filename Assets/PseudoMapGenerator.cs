@@ -31,13 +31,13 @@ public class PseudoMapGenerator : MonoBehaviour
         pseudoRandom = new System.Random(seed.GetHashCode());
 
         GenerateSolidRow();
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 50; i++)
             GenerateRandomRow();
     }
 
     void Update()
     {
-        if (GameController.Instance.Player1.GetComponent<PlayerController>().isActiveAndEnabled && GameController.Instance.Player2.GetComponent<PlayerController>().isActiveAndEnabled)
+        if (GameController.Instance.Player1 != null && GameController.Instance.Player2 != null)
         {
             if (GameController.Instance.Player1.GetComponent<PlayerController>().lastPlatformNumber <
                         GameController.Instance.Player2.GetComponent<PlayerController>().lastPlatformNumber)
@@ -55,17 +55,14 @@ public class PseudoMapGenerator : MonoBehaviour
 
         if (map != null)
         {
-            foreach (GameObject[] item in map)
-            {
-                if (((GameObject)item[0]).GetComponent<TrollPad>().Length < lastLosingPlayerPlatformNumber - 3)
-                {
-                    RemoveFirstRow();
-                }
-            }
+                for (int j = 0; j < width; ++j)
+                    if ((map[0])[j] != null)
+                        if (((GameObject)(map[0])[j]).GetComponent<TrollPad>().Length < lastLosingPlayerPlatformNumber - 3)
+                            RemoveFirstRow();
         }
 
 
-        if (lastWinningPlayerPlatformNumber > currentRowCount - 20)
+        if (lastWinningPlayerPlatformNumber > currentRowCount - 50)
             GenerateRandomRow();
 
         Debug.Log(currentRowCount);
