@@ -28,16 +28,19 @@ public class Randomizer : MonoBehaviour {
             do
             {
                 tempRandom = random;
-                random = Random.Range(1, 4);
+                random = Random.Range(1, 7);
                 switch (random)
                 {
                     case 1:
+                    case 4:
                         playerSelected = PlayerSelection.Player1;
                         break;
                     case 2:
+                    case 5:
                         playerSelected = PlayerSelection.Player2;
                         break;
                     case 3:
+                    case 6:
                         playerSelected = PlayerSelection.Both;
                         break;
                 }
