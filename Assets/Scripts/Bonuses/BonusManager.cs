@@ -9,18 +9,16 @@ public class BonusManager : MonoBehaviour
     private BonusBase currentBonus;
     private BonusBase currentBonus2;
     public GameObject[] bonusesPrefabs;
-    public Randomizer randomizer;
     public Text bonusText;
     public float textDuration = 1.0f;
 
 	private void Start ()
     {
         Instance = this;
-        bonusText.text = "";
-        InvokeRepeating("RandomizeBonuses", timeBetweenBonusesChange, timeBetweenBonusesChange);
+        //bonusText.text = "";
 	}
 
-    private void RandomizeBonuses()
+    public void RandomizeBonuses(Randomizer.PlayerSelection playerSelected)
     {
         if (currentBonus != null)
             currentBonus.Deactivate();
@@ -31,7 +29,7 @@ public class BonusManager : MonoBehaviour
         currentBonus = currentBonusObj.GetComponent<BonusBase>();
         Debug.Log(currentBonus.gameObject.name);
         StartCoroutine("ShowBonusText");
-        switch (randomizer.playerSelected)
+        switch (playerSelected)
         {
             case Randomizer.PlayerSelection.Player1: currentBonus.Activate(GameController.Instance.Player1); break;
             case Randomizer.PlayerSelection.Player2: currentBonus.Activate(GameController.Instance.Player2); break;
@@ -49,8 +47,8 @@ public class BonusManager : MonoBehaviour
 
     private IEnumerator ShowBonusText()
     {
-        bonusText.text = currentBonus.Name;
+        //bonusText.text = currentBonus.Name;
         yield return new WaitForSeconds(textDuration);
-        bonusText.text = "";
+        //bonusText.text = "";
     }
 }

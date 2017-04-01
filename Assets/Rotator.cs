@@ -45,11 +45,18 @@ public class Rotator : MonoBehaviour {
                     }
                 }
                 Debug.Log(selected.name);
+                
                 timer += Time.deltaTime;
             }
         }
         else
         {
+            if (selected.name.Contains("Player1"))
+                BonusManager.Instance.RandomizeBonuses(Randomizer.PlayerSelection.Player1);
+            if (selected.name.Contains("Player2"))
+                BonusManager.Instance.RandomizeBonuses(Randomizer.PlayerSelection.Player2);
+            if (selected.name.Contains("Both"))
+                BonusManager.Instance.RandomizeBonuses(Randomizer.PlayerSelection.Both);
             torque = new Vector3(Random.Range(-360f, 360f), Random.Range(-360f, 360f), Random.Range(-360f, 360f));
             rb.AddTorque(torque, ForceMode.Impulse);
             timer = 0.0f;
