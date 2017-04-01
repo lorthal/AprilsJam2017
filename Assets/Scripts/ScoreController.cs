@@ -7,8 +7,6 @@ public class ScoreController : MonoBehaviour {
 
     public Text player1Score;
     public Text player2Score;
-    public GameObject player1;
-    public GameObject player2;
     public GameObject platform;
     public PlayerHealthController phc;
 
@@ -40,34 +38,32 @@ public class ScoreController : MonoBehaviour {
         {
             if (GameController.Instance.Player1.activeInHierarchy && GameController.Instance.Player2.activeInHierarchy)
             {
-                playerDistance = Mathf.Abs(player1.transform.position.z - player2.transform.position.z);
+                playerDistance = Mathf.Abs(GameController.Instance.Player1.transform.position.z - GameController.Instance.Player2.transform.position.z);
                 score = (int)Mathf.Floor(playerDistance / platformSize);
-                if (player1.transform.position.z > player2.transform.position.z)
+                if (GameController.Instance.Player1.transform.position.z > GameController.Instance.Player2.transform.position.z)
                 {
                     player1ScoreValue += score;
                 }
-                else if (player2.transform.position.z > player1.transform.position.z)
+                else if (GameController.Instance.Player2.transform.position.z > GameController.Instance.Player1.transform.position.z)
                 {
                     player2ScoreValue += score;
                 }
-                Debug.Log("platform size: " + platformSize);
-                Debug.Log("playerDistance: " + playerDistance);
-                Debug.Log("score: " + score);
+                
                 yield return new WaitForSeconds(1);
             }
             else if(GameController.Instance.Player1.activeInHierarchy)
             {
                 score = phc.playerHealth1;
-                player1ScoreValue = score;
+                player1ScoreValue += score;
                 yield return new WaitForSeconds(3);
             }
             else if(GameController.Instance.Player2.activeInHierarchy)
             {
                 score = phc.playerHealth2;
-                player2ScoreValue = score;
+                player2ScoreValue += score;
                 yield return new WaitForSeconds(3);
             }
-            
+            Debug.Log("score: " + score);
         }
     }
 }
