@@ -28,7 +28,10 @@ public class BonusManager : MonoBehaviour
             case Randomizer.PlayerSelection.Both:
                 {
                     currentBonus.ApplyBonus(GameController.Instance.Player1);
-                    currentBonus.ApplyBonus(GameController.Instance.Player2);
+                    //Create new bonus game object for second player
+                    GameObject currentBonusObj2 = Instantiate(bonusesPrefabs[randomBonusId], transform);
+                    BonusBase currentBonus2 = currentBonusObj2.GetComponent<BonusBase>();
+                    currentBonus2.ApplyBonus(GameController.Instance.Player2);
                 }
                 break;
         }

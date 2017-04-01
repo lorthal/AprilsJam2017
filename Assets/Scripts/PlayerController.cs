@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour {
     public float maxHorizontal;
     public float jumpForce;
     public bool Player1;
+    public bool inversedControlls;
+
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
@@ -34,19 +36,31 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.UpArrow) && vel.z <= maxHorizontal)
         {
-            vel += transform.forward * speedHorizontal;
+            if(!inversedControlls)
+                vel += transform.forward * speedHorizontal;
+            else
+                vel -= transform.forward * speedHorizontal;
         }
         if (Input.GetKey(KeyCode.DownArrow) && vel.z >= -maxHorizontal)
         {
-            vel -= transform.forward * speedHorizontal;
+            if (!inversedControlls)
+                vel -= transform.forward * speedHorizontal;
+            else
+                vel += transform.forward * speedHorizontal;
         }
         if (Input.GetKey(KeyCode.LeftArrow) && vel.x <= maxVertical)
         {
-            vel -= transform.right * speedVertical;
+            if(!inversedControlls)
+                vel -= transform.right * speedVertical;
+            else
+                vel += transform.right * speedVertical;
         }
         if (Input.GetKey(KeyCode.RightArrow) && vel.x >= -maxVertical)
         {
-            vel += transform.right * speedVertical;
+            if(!inversedControlls)
+                vel += transform.right * speedVertical;
+            else
+                vel -= transform.right * speedVertical;
         }
         if (Input.GetKeyDown(KeyCode.RightControl) && isGrounded)
         {
@@ -62,19 +76,31 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.W) && vel.z <= maxHorizontal)
         {
-            vel += transform.forward * speedHorizontal;
+            if(!inversedControlls)
+                vel += transform.forward * speedHorizontal;
+            else
+                vel -= transform.forward * speedHorizontal;
         }
         if (Input.GetKey(KeyCode.S) && vel.z >= -maxHorizontal)
         {
-            vel -= transform.forward * speedHorizontal;
+            if (!inversedControlls)
+                vel -= transform.forward * speedHorizontal;
+            else
+                vel += transform.forward * speedHorizontal;
         }
         if (Input.GetKey(KeyCode.A) && vel.x <= maxVertical)
         {
-            vel -= transform.right * speedVertical;
+            if(!inversedControlls)
+                vel -= transform.right * speedVertical;
+            else
+                vel += transform.right * speedVertical;
         }
         if (Input.GetKey(KeyCode.D) && vel.x >= -maxVertical)
         {
-            vel += transform.right * speedVertical;
+            if(!inversedControlls)
+                vel += transform.right * speedVertical;
+            else
+                vel -= transform.right * speedVertical;
         }
         if (Input.GetKeyDown(KeyCode.LeftControl) && isGrounded)
         {

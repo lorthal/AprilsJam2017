@@ -7,5 +7,8 @@ public abstract class BonusBase : MonoBehaviour
     [Tooltip("Duration in seconds.")]
     public float duration = 0.0f;
 
-    public abstract void ApplyBonus(GameObject player);
+    public virtual void ApplyBonus(GameObject player)
+    {
+        this.player = player;
+    }
 }
