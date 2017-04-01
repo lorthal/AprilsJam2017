@@ -21,7 +21,7 @@ public class Rotator : MonoBehaviour {
         torque = new Vector3(Random.Range(-360f, 360f), Random.Range(-360f, 360f), Random.Range(-360f, 360f));
         rb.AddTorque(torque, ForceMode.Impulse);
         selected = null;
-        alreadyRandomizedBonuses = false;
+        alreadyRandomizedBonuses = true;
     }
 
     private void FixedUpdate()
