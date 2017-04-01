@@ -31,33 +31,41 @@ public class PseudoMapGenerator : MonoBehaviour
         pseudoRandom = new System.Random(seed.GetHashCode());
 
         GenerateSolidRow();
-        for(int i = 0; i < 20; i ++)
+        for (int i = 0; i < 20; i++)
             GenerateRandomRow();
     }
 
     void Update()
     {
-        if(GameController.Instance.Player1.GetComponent<PlayerController>().lastPlatformNumber <
-            GameController.Instance.Player2.GetComponent<PlayerController>().lastPlatformNumber)
+        if (GameController.Instance.Player1.GetComponent<PlayerController>().isActiveAndEnabled && GameController.Instance.Player2.GetComponent<PlayerController>().isActiveAndEnabled)
         {
-            lastWinningPlayerPlatformNumber = GameController.Instance.Player2.GetComponent<PlayerController>().lastPlatformNumber;
-            lastLosingPlayerPlatformNumber = GameController.Instance.Player1.GetComponent<PlayerController>().lastPlatformNumber;
-        }
-        else
-        {
-            lastWinningPlayerPlatformNumber = GameController.Instance.Player1.GetComponent<PlayerController>().lastPlatformNumber;
-            lastLosingPlayerPlatformNumber = GameController.Instance.Player2.GetComponent<PlayerController>().lastPlatformNumber;
-        }
-
-        foreach (GameObject[] item in map)
-        {
-            if(((GameObject)item[0]).GetComponent<TrollPad>().Length < lastLosingPlayerPlatformNumber -3)
+            if (GameController.Instance.Player1.GetComponent<PlayerController>().lastPlatformNumber <
+                        GameController.Instance.Player2.GetComponent<PlayerController>().lastPlatformNumber)
             {
-                RemoveFirstRow();
+                lastWinningPlayerPlatformNumber = GameController.Instance.Player2.GetComponent<PlayerController>().lastPlatformNumber;
+                lastLosingPlayerPlatformNumber = GameController.Instance.Player1.GetComponent<PlayerController>().lastPlatformNumber;
+            }
+            else
+            {
+                lastWinningPlayerPlatformNumber = GameController.Instance.Player1.GetComponent<PlayerController>().lastPlatformNumber;
+                lastLosingPlayerPlatformNumber = GameController.Instance.Player2.GetComponent<PlayerController>().lastPlatformNumber;
             }
         }
 
-        if (lastWinningPlayerPlatformNumber > currentRowCount -20)
+
+        if (map != null)
+        {
+            foreach (GameObject[] item in map)
+            {
+                if (((GameObject)item[0]).GetComponent<TrollPad>().Length < lastLosingPlayerPlatformNumber - 3)
+                {
+                    RemoveFirstRow();
+                }
+            }
+        }
+
+
+        if (lastWinningPlayerPlatformNumber > currentRowCount - 20)
             GenerateRandomRow();
 
         Debug.Log(currentRowCount);
@@ -81,14 +89,20 @@ public class PseudoMapGenerator : MonoBehaviour
         if (pseudoRandom.Next(0, 100) < chanceToSpawnPad)
         {
             int rand = pseudoRandom.Next(1, width / 2);
-            row[rand] = (GameObject)Instantiate(Resources.Load("TrollPad"), Vector3.zero, Quaternion.identity);
+            if (pseudoRandom.Next(0, 100) > 25)
+                row[rand] = (GameObject)Instantiate(Resources.Load("TrollPad"), Vector3.zero, Quaternion.identity);
+            else
+                row[rand] = (GameObject)Instantiate(Resources.Load("DisapearingPad"), Vector3.zero, Quaternion.identity);
             ((GameObject)row[rand]).GetComponent<TrollPad>().Length = currentRowCount;
             ((GameObject)row[rand]).GetComponent<TrollPad>().Row = rand;
         }
         if (pseudoRandom.Next(0, 100) < chanceToSpawnPad)
         {
             int rand = pseudoRandom.Next(width / 2 + 1, width - 1);
-            row[rand] = (GameObject)Instantiate(Resources.Load("TrollPad"), Vector3.zero, Quaternion.identity);
+            if (pseudoRandom.Next(0, 100) > 25)
+                row[rand] = (GameObject)Instantiate(Resources.Load("TrollPad"), Vector3.zero, Quaternion.identity);
+            else
+                row[rand] = (GameObject)Instantiate(Resources.Load("DisapearingPad"), Vector3.zero, Quaternion.identity);
             ((GameObject)row[rand]).GetComponent<TrollPad>().Length = currentRowCount;
             ((GameObject)row[rand]).GetComponent<TrollPad>().Row = rand;
         }
@@ -116,6 +130,8 @@ public class PseudoMapGenerator : MonoBehaviour
         row[width - 1] = (GameObject)Instantiate(Resources.Load("Wall"), Vector3.zero, Quaternion.identity);
         ((GameObject)row[width - 1]).GetComponent<TrollPad>().Length = currentRowCount;
         ((GameObject)row[width - 1]).GetComponent<TrollPad>().Row = width - 1;
+
+
 
         map.Add(row);
         currentRowCount++;
@@ -151,7 +167,7 @@ public class PseudoMapGenerator : MonoBehaviour
 
     void RemoveFirstRow()
     {
-        if(currentRowCount >0)
+        if (currentRowCount > 0)
         {
             foreach (var item in map[0])
             {
