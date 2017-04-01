@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TrollPad : MonoBehaviour {
 
-    public EventHandler OnPlayerStepOnPad;
+    public event EventHandler OnPlayerStepOnPad;
 
     public int worldX {
         get { return posX; }
@@ -41,7 +41,7 @@ public class TrollPad : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<PlayerPad>().number = posY;
+        PlayerStepOnPad();
     }
 
     public void PlayerStepOnPad()

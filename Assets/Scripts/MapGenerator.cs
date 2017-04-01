@@ -40,7 +40,7 @@ public class MapGenerator : MonoBehaviour {
         for (int i = 0; i < width; i++)
         {
             map[0, i] = Instantiate(Resources.Load("TrollPad"), new Vector3(currentLength, 0, i), Quaternion.identity);
-            ((TrollPad)map[0, 1]).OnPlayerStepOnPad += new EventHandler(PlayerEnterPad);
+            ((GameObject)map[0, i]).GetComponent<TrollPad>().OnPlayerStepOnPad += new EventHandler(PlayerEnterPad);
             ((GameObject)map[0, i]).GetComponent<TrollPad>().worldY = 0;
             ((GameObject)map[0, i]).GetComponent<TrollPad>().worldX = i;
         }
@@ -55,6 +55,7 @@ public class MapGenerator : MonoBehaviour {
                 map[currentLength, rand] = Instantiate(Resources.Load("TrollPad"), new Vector3(currentLength, 0, rand), Quaternion.identity);
                 ((GameObject)map[currentLength, rand]).GetComponent<TrollPad>().worldX = rand;
                 ((GameObject)map[currentLength, rand]).GetComponent<TrollPad>().worldY = currentLength;
+                ((GameObject)map[currentLength, rand]).GetComponent<TrollPad>().OnPlayerStepOnPad += new EventHandler(PlayerEnterPad);
 
             }
                
@@ -67,6 +68,7 @@ public class MapGenerator : MonoBehaviour {
                 {
                     ((GameObject)map[currentLength, width / 2]).GetComponent<TrollPad>().worldX = width/2;
                     ((GameObject)map[currentLength, width / 2]).GetComponent<TrollPad>().worldY = currentLength;
+                    ((GameObject)map[currentLength, width / 2]).GetComponent<TrollPad>().OnPlayerStepOnPad += new EventHandler(PlayerEnterPad);
                 }
 
             }
@@ -78,6 +80,7 @@ public class MapGenerator : MonoBehaviour {
                 map[currentLength, rand] = Instantiate(Resources.Load("TrollPad"), new Vector3(currentLength, 0, rand), Quaternion.identity);
                 ((GameObject)map[currentLength, rand]).GetComponent<TrollPad>().worldX = rand;
                 ((GameObject)map[currentLength, rand]).GetComponent<TrollPad>().worldY = currentLength;
+                ((GameObject)map[currentLength, rand]).GetComponent<TrollPad>().OnPlayerStepOnPad += new EventHandler(PlayerEnterPad);
             }
             currentLength++;
         }
@@ -120,6 +123,7 @@ public class MapGenerator : MonoBehaviour {
                 map[length-1, rand] = Instantiate(Resources.Load("TrollPad"), new Vector3(length - 1, 0, rand), Quaternion.identity);
                 ((GameObject)map[length - 1, rand]).GetComponent<TrollPad>().worldX = rand;
                 ((GameObject)map[length - 1, rand]).GetComponent<TrollPad>().worldY = currentLength;
+                ((GameObject)map[length - 1, rand]).GetComponent<TrollPad>().OnPlayerStepOnPad += new EventHandler(PlayerEnterPad);
 
             }
 
@@ -132,6 +136,7 @@ public class MapGenerator : MonoBehaviour {
                 {
                     ((GameObject)map[length - 1, width / 2]).GetComponent<TrollPad>().worldX = width/2;
                     ((GameObject)map[length - 1, width / 2]).GetComponent<TrollPad>().worldY = currentLength;
+                    ((GameObject)map[length - 1, width / 2]).GetComponent<TrollPad>().OnPlayerStepOnPad += new EventHandler(PlayerEnterPad);
                 }
 
             }
@@ -142,6 +147,7 @@ public class MapGenerator : MonoBehaviour {
                 map[length - 1, rand] = Instantiate(Resources.Load("TrollPad"), new Vector3(length - 1, 0, rand), Quaternion.identity);
                 ((GameObject)map[length - 1, rand]).GetComponent<TrollPad>().worldX = rand;
                 ((GameObject)map[length - 1, rand]).GetComponent<TrollPad>().worldY = currentLength;
+                ((GameObject)map[length - 1, rand]).GetComponent<TrollPad>().OnPlayerStepOnPad += new EventHandler(PlayerEnterPad);
             }
         currentLength++;
     }
@@ -152,12 +158,13 @@ public class MapGenerator : MonoBehaviour {
         {
             if (map[0, i] != null)
                 ((GameObject)map[0, i]).GetComponent<TrollPad>().Destroy();
+                ((GameObject)map[0, i]).GetComponent<TrollPad>().OnPlayerStepOnPad -= new EventHandler(PlayerEnterPad);
         }
 
     }
 
     void PlayerEnterPad(object sender, EventArgs e)
     {
-
+        Debug.Log("dsd");
     }
 }
