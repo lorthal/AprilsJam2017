@@ -31,7 +31,6 @@ public class Rotator : MonoBehaviour {
             if (rb.angularVelocity.magnitude < 0.4f)
             {
                 rb.angularVelocity = Vector3.zero;
-                Debug.Log(transform.localRotation.eulerAngles);
                 Vector3 targetRotation = new Vector3(Mathf.Round(transform.localRotation.eulerAngles.x / 90) * 90,
                     Mathf.Round(transform.localRotation.eulerAngles.y / 90) * 90,
                     Mathf.Round(transform.localRotation.eulerAngles.z / 90) * 90);
@@ -47,7 +46,6 @@ public class Rotator : MonoBehaviour {
                         selected = item.gameObject;
                     }
                 }
-                Debug.Log(selected.name);
 
                 if (!alreadyRandomizedBonuses)
                 {

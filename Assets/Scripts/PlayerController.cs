@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -60,6 +60,12 @@ public class PlayerController : MonoBehaviour {
             Player1Input();
         else
             Player2Input();
+
+        //Temporary restart level
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene("main");
+        }
     }
 
     void Player1Input()
@@ -100,7 +106,10 @@ public class PlayerController : MonoBehaviour {
             Rb.AddForce(transform.up * jumpForce);
         }
         if (vel.magnitude >= .75f)
-            Rb.AddForce(vel);
+            Rb.velocity = new Vector3(vel.x, Rb.velocity.y, vel.z);
+        else
+            Rb.velocity = new Vector3(0, Rb.velocity.y, 0);
+
 
         if (Input.GetKey(KeyCode.LeftControl) && !pushUsed)
             StartCoroutine("PushSecondPlayer");
@@ -138,7 +147,7 @@ public class PlayerController : MonoBehaviour {
                 vel -= transform.right * speedVertical;
         }
 
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.JoystickButton0)) && isGrounded)
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton0)) && isGrounded)
         {
             Rb.AddForce(transform.up * jumpForce);
         }

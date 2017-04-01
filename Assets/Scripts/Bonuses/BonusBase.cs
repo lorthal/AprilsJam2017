@@ -5,7 +5,7 @@ public abstract class BonusBase : MonoBehaviour
     protected GameObject player;
     protected PlayerController playerController;
     public string Name { get; protected set; }
-    public Texture bonusIconTexture;
+    public Material bonusIconMaterial;
 
     public virtual void Activate(GameObject player)
     {

@@ -65,7 +65,6 @@ public class PseudoMapGenerator : MonoBehaviour
         if (lastWinningPlayerPlatformNumber > currentRowCount - 50)
             GenerateRandomRow();
 
-        Debug.Log(currentRowCount);
         if (Input.GetMouseButtonDown(0))
         {
             GenerateRandomRow();
