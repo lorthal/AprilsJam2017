@@ -31,11 +31,30 @@ public class WallScript : MonoBehaviour {
     public WallScript()
     {
         child = new GameObject[10];
+        
+    }
+
+    private void Start()
+    {
+        for (int i = -5; i < 5; i++)
+        {
+            child[i + 5] = (GameObject)Instantiate(Resources.Load("Brick"), new Vector3(transform.position.x, GetComponent<Collider>().bounds.size.y * i, transform.position.z), Quaternion.identity);
+        }
     }
     public void Destroy()
     {
-        Destroy(this.gameObject);
+        
     }
-
+    private void OnDestroy()
+    {
+        foreach (GameObject item in child)
+                {
+                    if(child != null)
+                    {
+                        GameObject.Destroy(item);
+                    }
+                }
+                Destroy(this.gameObject);
+    }
 }
 
