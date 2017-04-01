@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class BonusManager : MonoBehaviour
 {
     public static BonusManager Instance { get; private set; }
-    public float timeBetweenBonusesChange = 3.0f;
     private BonusBase currentBonus;
     private BonusBase currentBonus2;
     public GameObject[] bonusesPrefabs;
