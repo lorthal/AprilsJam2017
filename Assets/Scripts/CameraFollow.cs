@@ -13,8 +13,12 @@ public class CameraFollow : MonoBehaviour
         offset = transform.position - player.transform.position;
     }
 
-    void Update () {
-        transform.position = player.transform.position + offset;
-        transform.LookAt(player.transform);
+    void Update ()
+    {
+        if (player != null)
+        {
+            transform.position = player.transform.position + offset;
+            transform.LookAt(player.transform);
+        }
 	}
 }
