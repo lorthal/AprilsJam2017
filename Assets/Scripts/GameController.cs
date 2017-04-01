@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
@@ -14,7 +12,7 @@ public class GameController : MonoBehaviour
     {
         Instance = this;
 
-        Player1 = Instantiate(player1Prefab, Vector3.zero, Quaternion.identity);
-        Player2 = Instantiate(player2Prefab, Vector3.zero, Quaternion.identity);
+        Player1 = Instantiate(player1Prefab, new Vector3(1.0f,1.0f,0.0f), Quaternion.identity);
+        Player2 = Instantiate(player2Prefab, new Vector3(6.0f,1.0f,0.0f), Quaternion.identity);
 	}
 }
