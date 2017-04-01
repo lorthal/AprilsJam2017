@@ -2,7 +2,6 @@
 
 public class BonusSlide : BonusBase
 {
-    private PlayerController playerController;
     public float slideSpeed = 10.0f;
 
     private void Awake()
@@ -13,7 +12,6 @@ public class BonusSlide : BonusBase
     public override void Activate(GameObject player)
     {
         base.Activate(player);
-        playerController = player.GetComponent<PlayerController>();
         playerController.SlideControlls = true;
     }
 

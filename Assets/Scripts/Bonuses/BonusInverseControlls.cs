@@ -2,8 +2,6 @@
 
 public class BonusInverseControlls : BonusBase
 {
-    private PlayerController playerController;
-
     private void Awake()
     {
         Name = "Inverse Controls";
@@ -12,7 +10,6 @@ public class BonusInverseControlls : BonusBase
     public override void Activate(GameObject player)
     {
         base.Activate(player);
-        playerController = player.GetComponent<PlayerController>();
         playerController.inversedControlls = true;
     }
 
