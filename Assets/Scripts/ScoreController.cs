@@ -63,7 +63,11 @@ public class ScoreController : MonoBehaviour {
                 player2ScoreValue += score;
                 yield return new WaitForSeconds(3);
             }
-            Debug.Log("score: " + score);
+            else
+            {
+                StopAllCoroutines();
+                yield return null;
+            }
         }
     }
 }
