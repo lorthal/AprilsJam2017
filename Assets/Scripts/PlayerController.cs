@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour {
     public float controllsSensitivity = 1.0f;
 
     public GameObject lastPlatform { get; private set; }
-    public int lastPlatformNumber { get; private set; }
+    public int lastPlatformNumber;
 
 	// Use this for initialization
 	void Start () {
