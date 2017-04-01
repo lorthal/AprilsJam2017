@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour {
-
+    
     private int width;
     private int length;
 
@@ -23,8 +23,6 @@ public class MapGenerator : MonoBehaviour {
         map = new UnityEngine.Object[length, width];
         seed = Guid.NewGuid().ToString();
         RandomGenerateMap();
-        
-
     }
 
     private void Update()
@@ -154,6 +152,11 @@ public class MapGenerator : MonoBehaviour {
             if (map[0, i] != null)
                 ((GameObject)map[0, i]).GetComponent<TrollPad>().Destroy();
         }
+
+    }
+
+    void PlayerEnterPad()
+    {
 
     }
 }

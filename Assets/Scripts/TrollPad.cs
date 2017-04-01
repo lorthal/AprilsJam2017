@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TrollPad : MonoBehaviour {
-
+    
     public int worldX {
         get { return posX; }
         set {
@@ -34,5 +35,15 @@ public class TrollPad : MonoBehaviour {
     public void Destroy()
     {
         Destroy(this.gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        other.gameObject.GetComponent<PlayerPad>().number = posY;
+    }
+
+    public void PlayerStepOnPad()
+    {
+        OnPlayerStepOnPad(this, new EventArgs());
     }
 }
