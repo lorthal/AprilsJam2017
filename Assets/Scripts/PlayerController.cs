@@ -152,7 +152,9 @@ public class PlayerController : MonoBehaviour {
             Rb.AddForce(transform.up * jumpForce);
         }
         if (vel.magnitude >= .75f)
-            Rb.AddForce(vel);
+            Rb.velocity = new Vector3(vel.x, Rb.velocity.y, vel.z);
+        else
+            Rb.velocity = new Vector3(0, Rb.velocity.y, 0);
 
         if ((Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.JoystickButton1)) && !pushUsed)
             StartCoroutine("PushSecondPlayer");
