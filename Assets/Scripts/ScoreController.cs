@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ScoreController : MonoBehaviour {
@@ -23,7 +24,6 @@ public class ScoreController : MonoBehaviour {
         player2ScoreValue = 0;
         platformSize = platform.GetComponent<MeshRenderer>().bounds.size.z;
         StartCoroutine(ScoreCounter());
-        
     }
 
     private void OnGUI()
@@ -34,6 +34,7 @@ public class ScoreController : MonoBehaviour {
 
     IEnumerator ScoreCounter()
     {
+        yield return new WaitForSeconds(0.5f); //delay for restarting game
         while (true)
         {
             if (GameController.Instance.Player1 != null && GameController.Instance.Player2 != null)

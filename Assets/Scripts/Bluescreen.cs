@@ -24,7 +24,10 @@ public class Bluescreen : MonoBehaviour
             else
             {
                 if (Input.GetKeyDown(KeyCode.R))
+                {
                     SceneManager.LoadScene("main");
+                }
+
             }
         }
     }

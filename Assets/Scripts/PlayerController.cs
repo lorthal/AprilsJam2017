@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
         {
             slideControlls = value;
             if (slideControlls)
-                controllsSensitivity = 0.5f;
+                controllsSensitivity = 0.75f;
             else
                 controllsSensitivity = 1.0f;
         }
@@ -60,12 +60,6 @@ public class PlayerController : MonoBehaviour {
             Player1Input();
         else
             Player2Input();
-
-        //Temporary restart level
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene("main");
-        }
     }
 
     void Player1Input()
