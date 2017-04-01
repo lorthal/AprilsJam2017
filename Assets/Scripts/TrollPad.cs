@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TrollPad : MonoBehaviour {
-
-    public EventHandler OnPlayerStepOnPad;
+    
 
     public int Row {
         get { return posX; }
@@ -41,11 +40,7 @@ public class TrollPad : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerStepOnPad();
+        other.GetComponent<PlayerController>().lastPlatformNumber = Length;
     }
-
-    public void PlayerStepOnPad()
-    {
-        GameController.Instance.Player1.GetComponent<PlayerController>().lastPlatformNumber = Length;
-    }
+    
 }

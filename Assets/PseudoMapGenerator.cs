@@ -7,7 +7,6 @@ public class PseudoMapGenerator : MonoBehaviour
 {
 
     private int width;
-    private int startLength;
     private int currentRowCount;
 
     private int lastLosingPlayerPlatformNumber;
@@ -18,17 +17,22 @@ public class PseudoMapGenerator : MonoBehaviour
     private int chanceToSpawnPad;
 
     List<UnityEngine.Object[]> map;
+    List<UnityEngine.Object[]> wallMap;
 
     void Start()
     {
         width = 9;
-        startLength = 30;
         lastLosingPlayerPlatformNumber = 0;
         lastWinningPlayerPlatformNumber = 0;
         seed = Guid.NewGuid().ToString();
         chanceToSpawnPad = 70;
         map = new List<UnityEngine.Object[]>();
+        wallMap = new List<UnityEngine.Object[]>();
         pseudoRandom = new System.Random(seed.GetHashCode());
+
+        GenerateSolidRow();
+        for(int i = 0; i < 20; i ++)
+            GenerateRandomRow();
     }
 
     void Update()
@@ -45,6 +49,16 @@ public class PseudoMapGenerator : MonoBehaviour
             lastLosingPlayerPlatformNumber = GameController.Instance.Player2.GetComponent<PlayerController>().lastPlatformNumber;
         }
 
+        foreach (GameObject[] item in map)
+        {
+            if(((GameObject)item[0]).GetComponent<TrollPad>().Length < lastLosingPlayerPlatformNumber -3)
+            {
+                RemoveFirstRow();
+            }
+        }
+
+        if (lastWinningPlayerPlatformNumber > currentRowCount -20)
+            GenerateRandomRow();
 
         Debug.Log(currentRowCount);
         if (Input.GetMouseButtonDown(0))
@@ -144,9 +158,8 @@ public class PseudoMapGenerator : MonoBehaviour
                 GameObject.Destroy(item);
             }
             map.RemoveAt(0);
-            currentRowCount--;
         }
 
     }
-
+    
 }
