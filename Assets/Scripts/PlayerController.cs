@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour {
     public bool Player1;
     public bool inversedControlls;
 
+    public GameObject lastPlatform { get; private set; }
+
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
@@ -115,6 +117,7 @@ public class PlayerController : MonoBehaviour {
         if(collision.collider.gameObject.tag == "Ground")
         {
             isGrounded = true;
+            lastPlatform = collision.gameObject;
         }
     }
     private void OnCollisionExit(Collision collision)

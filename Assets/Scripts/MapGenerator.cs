@@ -40,6 +40,7 @@ public class MapGenerator : MonoBehaviour {
         for (int i = 0; i < width; i++)
         {
             map[0, i] = Instantiate(Resources.Load("TrollPad"), new Vector3(currentLength, 0, i), Quaternion.identity);
+            ((TrollPad)map[0, 1]).OnPlayerStepOnPad += new EventHandler(PlayerEnterPad);
             ((GameObject)map[0, i]).GetComponent<TrollPad>().worldY = 0;
             ((GameObject)map[0, i]).GetComponent<TrollPad>().worldX = i;
         }
@@ -155,7 +156,7 @@ public class MapGenerator : MonoBehaviour {
 
     }
 
-    void PlayerEnterPad()
+    void PlayerEnterPad(object sender, EventArgs e)
     {
 
     }

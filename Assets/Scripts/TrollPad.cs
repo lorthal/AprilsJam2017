@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TrollPad : MonoBehaviour {
-    
+
+    public EventHandler OnPlayerStepOnPad;
+
     public int worldX {
         get { return posX; }
         set {
