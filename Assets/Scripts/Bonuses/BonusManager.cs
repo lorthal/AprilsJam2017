@@ -8,17 +8,21 @@ public class BonusManager : MonoBehaviour
     private BonusBase currentBonus;
     private BonusBase currentBonus2;
     public GameObject[] bonusesPrefabs;
-    public Text bonusText;
-    public float textDuration = 1.0f;
+    public GameObject bonusIcon;
+    public float bonusIconStayTime = 1.0f;
+    private Quaternion bonusIconStayRotation;
 
 	private void Start ()
     {
         Instance = this;
-        //bonusText.text = "";
-	}
+        bonusIconStayRotation = bonusIcon.transform.rotation;
+        InvokeRepeating("RotateBonusIcon", 0.0f, Time.fixedDeltaTime);
+    }
 
     public void RandomizeBonuses(Randomizer.PlayerSelection playerSelected)
     {
+        CancelInvoke("RotateBonusIcon");
+        bonusIcon.transform.rotation = bonusIconStayRotation;
         if (currentBonus != null)
             currentBonus.Deactivate();
         if (currentBonus2 != null)
@@ -26,8 +30,9 @@ public class BonusManager : MonoBehaviour
         int randomBonusId = Random.Range(0, bonusesPrefabs.Length);
         GameObject currentBonusObj = Instantiate(bonusesPrefabs[randomBonusId], transform);
         currentBonus = currentBonusObj.GetComponent<BonusBase>();
+        bonusIcon.GetComponentInChildren<Renderer>().material.mainTexture = currentBonus.bonusIconTexture;
+        StartCoroutine("StartRotatingBonusIconWithDelay");
         Debug.Log(currentBonus.gameObject.name);
-        StartCoroutine("ShowBonusText");
         switch (playerSelected)
         {
             case Randomizer.PlayerSelection.Player1: currentBonus.Activate(GameController.Instance.Player1); break;
@@ -44,10 +49,14 @@ public class BonusManager : MonoBehaviour
         }
     }
 
-    private IEnumerator ShowBonusText()
+    private void RotateBonusIcon()
     {
-        //bonusText.text = currentBonus.Name;
-        yield return new WaitForSeconds(textDuration);
-        //bonusText.text = "";
+        bonusIcon.transform.Rotate(720.0f * Time.fixedDeltaTime, 0.0f, 0.0f);
+    }
+
+    private IEnumerator StartRotatingBonusIconWithDelay()
+    {
+        yield return new WaitForSeconds(bonusIconStayTime);
+        InvokeRepeating("RotateBonusIcon", 0.0f, Time.fixedDeltaTime);
     }
 }
