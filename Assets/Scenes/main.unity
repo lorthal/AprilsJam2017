@@ -1058,7 +1058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bluescreenBG: {fileID: 296828298}
-  delayBeforeBluescreen: 5
+  delayBeforeBluescreen: 3
   trollWhite: {fileID: 1944877415}
   trollViolet: {fileID: 1929285907}
 --- !u!4 &1561146783
@@ -1582,36 +1582,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4466668236140558, guid: 31d31d63de638a64093dee24e69bf3ba, type: 2}
       propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198778875098583320, guid: 31d31d63de638a64093dee24e69bf3ba,
-        type: 2}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198778875098583320, guid: 31d31d63de638a64093dee24e69bf3ba,
-        type: 2}
-      propertyPath: randomSeed
-      value: -983168149
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820133129823626, guid: 31d31d63de638a64093dee24e69bf3ba, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820133129823626, guid: 31d31d63de638a64093dee24e69bf3ba, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820133129823626, guid: 31d31d63de638a64093dee24e69bf3ba, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820133129823626, guid: 31d31d63de638a64093dee24e69bf3ba, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820133129823626, guid: 31d31d63de638a64093dee24e69bf3ba, type: 2}
-      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
