@@ -32,6 +32,5 @@ public class AudioController : MonoBehaviour {
             end = true;
             audio.time = ending;
         }
-        Debug.Log(audio.time);
 	}
 }
