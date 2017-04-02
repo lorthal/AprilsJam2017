@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour {
     public static float pushForce = 200.0f;
     private bool pushUsed;
     public bool inversedPush;
+    private AudioSource pushSound;
     #endregion
 
     public GameObject lastPlatform { get; private set; }
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour {
         isGrounded = true;
         pushUsed = false;
         inversedPush = false;
+        pushSound = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -158,6 +160,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (Vector3.Distance(GameController.Instance.Player1.transform.position, GameController.Instance.Player2.transform.position) <= pushRange)
         {
+            pushSound.Play();
             Vector3 relativeTargetPosition;
             pushUsed = true;
             if (Player1)
