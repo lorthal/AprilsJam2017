@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour {
     //Push ability
     public static float pushRange = 2.0f;
     public static float pushCooldown = 5.0f;
-    public static float pushForce = 10.0f;
+    public static float pushForce = 200.0f;
     private bool pushUsed;
     public bool inversedPush;
     #endregion
