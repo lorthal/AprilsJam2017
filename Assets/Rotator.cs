@@ -22,6 +22,7 @@ public class Rotator : MonoBehaviour {
         rb.AddTorque(torque, ForceMode.Impulse);
         selected = null;
         alreadyRandomizedBonuses = true;
+        
     }
 
     private void FixedUpdate()
@@ -49,6 +50,7 @@ public class Rotator : MonoBehaviour {
 
                 if (!alreadyRandomizedBonuses)
                 {
+                    GetComponentInChildren<ParticleSystem>().Play();
                     if (selected.name.Contains("Player1"))
                         BonusManager.Instance.RandomizeBonuses(Randomizer.PlayerSelection.Player1);
                     if (selected.name.Contains("Player2"))
@@ -57,7 +59,6 @@ public class Rotator : MonoBehaviour {
                         BonusManager.Instance.RandomizeBonuses(Randomizer.PlayerSelection.Both);
                 }
                 alreadyRandomizedBonuses = true;
-
                 timer += Time.deltaTime;
             }
         }

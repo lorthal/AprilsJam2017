@@ -22,6 +22,7 @@ public class BonusManager : MonoBehaviour
     public void RandomizeBonuses(Randomizer.PlayerSelection playerSelected)
     {
         CancelInvoke("RotateBonusIcon");
+        
         bonusIcon.transform.rotation = bonusIconStayRotation;
         if (currentBonus != null)
             currentBonus.Deactivate();
@@ -31,6 +32,7 @@ public class BonusManager : MonoBehaviour
         GameObject currentBonusObj = Instantiate(bonusesPrefabs[randomBonusId], transform);
         currentBonus = currentBonusObj.GetComponent<BonusBase>();
         bonusIcon.GetComponentInChildren<Renderer>().material = currentBonus.bonusIconMaterial;
+        bonusIcon.GetComponentInChildren<ParticleSystem>().Play();
         StartCoroutine("StartRotatingBonusIconWithDelay");
         Debug.Log(currentBonus.gameObject.name);
         switch (playerSelected)
