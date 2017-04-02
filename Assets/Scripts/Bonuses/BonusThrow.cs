@@ -2,7 +2,7 @@
 
 public class BonusThrow : BonusBase
 {
-    float throwForce = 10.0f;
+    public float throwForce = 10.0f;
 
     public override void Activate(GameObject player)
     {

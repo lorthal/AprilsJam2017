@@ -52,3 +52,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bonusIconMaterial: {fileID: 2100000, guid: 301909bc238a18b4ba7561838d9dfe5c, type: 2}
+  throwForce: 50
