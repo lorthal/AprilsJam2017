@@ -68,7 +68,10 @@ public class PlayerController : MonoBehaviour {
     {
         Vector3 vel = new Vector3();
 
-        if ((Input.GetKey(KeyCode.UpArrow) || slideControlls) && vel.z <= maxHorizontal)
+        if(slideControlls && isGrounded && vel.z <= maxHorizontal)
+            vel += transform.forward * speedHorizontal * controllsSensitivity;
+
+        if (Input.GetKey(KeyCode.UpArrow) && vel.z <= maxHorizontal)
         {
             if (!inversedControlls)
                 vel += transform.forward * speedHorizontal * controllsSensitivity;
@@ -114,7 +117,10 @@ public class PlayerController : MonoBehaviour {
     void Player2Input()
     {
         Vector3 vel = new Vector3();
-        if ((Input.GetKey(KeyCode.W) || (Input.GetAxis("VerticalJoystick") > 0.0f) || slideControlls) && vel.z <= maxHorizontal)
+        if (slideControlls && isGrounded && vel.z <= maxHorizontal)
+            vel += transform.forward * speedHorizontal * controllsSensitivity;
+
+        if ((Input.GetKey(KeyCode.W) || (Input.GetAxis("VerticalJoystick") > 0.0f)) && vel.z <= maxHorizontal)
         {
             if (!inversedControlls)
                 vel += transform.forward * speedHorizontal * controllsSensitivity;
