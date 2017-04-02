@@ -26,9 +26,9 @@ GameObject:
   - component: {fileID: 65253544723044564}
   - component: {fileID: 65891119209667838}
   - component: {fileID: 114297209268353592}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BreakingPad
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,7 +49,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4485182333626558
 Transform:
   m_ObjectHideFlags: 1

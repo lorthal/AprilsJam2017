@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 65892497128076410}
   - component: {fileID: 114011714971091734}
   - component: {fileID: 114535573780014724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TrollPad
   m_TagString: Ground
   m_Icon: {fileID: 0}

@@ -164,45 +164,48 @@ public class PlayerController : MonoBehaviour {
 
     private IEnumerator PushSecondPlayer()
     {
-        if (Vector3.Distance(GameController.Instance.Player1.transform.position, GameController.Instance.Player2.transform.position) <= pushRange)
+        if (GameController.Instance.Player1 != null && GameController.Instance.Player2 != null)
         {
-            pushSound.Play();
-            Vector3 relativeTargetPosition;
-            pushUsed = true;
-            if (Player1)
+            if (Vector3.Distance(GameController.Instance.Player1.transform.position, GameController.Instance.Player2.transform.position) <= pushRange)
             {
-                relativeTargetPosition = transform.InverseTransformPoint(GameController.Instance.Player2.transform.position);
-                if(!inversedPush)
+                pushSound.Play();
+                Vector3 relativeTargetPosition;
+                pushUsed = true;
+                if (Player1)
                 {
-                    if (relativeTargetPosition.x > 0.0f)
-                        GameController.Instance.Player2.GetComponent<PlayerController>().Rb.AddForce(GameController.Instance.Player2.transform.right * pushForce, ForceMode.Impulse);
+                    relativeTargetPosition = transform.InverseTransformPoint(GameController.Instance.Player2.transform.position);
+                    if (!inversedPush)
+                    {
+                        if (relativeTargetPosition.x > 0.0f)
+                            GameController.Instance.Player2.GetComponent<PlayerController>().Rb.AddForce(GameController.Instance.Player2.transform.right * pushForce, ForceMode.Impulse);
+                        else
+                            GameController.Instance.Player2.GetComponent<PlayerController>().Rb.AddForce(-GameController.Instance.Player2.transform.right * pushForce, ForceMode.Impulse);
+                    }
                     else
-                        GameController.Instance.Player2.GetComponent<PlayerController>().Rb.AddForce(-GameController.Instance.Player2.transform.right * pushForce, ForceMode.Impulse);
+                    {
+                        if (relativeTargetPosition.x > 0.0f)
+                            GameController.Instance.Player1.GetComponent<PlayerController>().Rb.AddForce(-GameController.Instance.Player1.transform.right * pushForce, ForceMode.Impulse);
+                        else
+                            GameController.Instance.Player1.GetComponent<PlayerController>().Rb.AddForce(GameController.Instance.Player1.transform.right * pushForce, ForceMode.Impulse);
+                    }
                 }
                 else
                 {
-                    if (relativeTargetPosition.x > 0.0f)
-                        GameController.Instance.Player1.GetComponent<PlayerController>().Rb.AddForce(-GameController.Instance.Player1.transform.right * pushForce, ForceMode.Impulse);
+                    relativeTargetPosition = transform.InverseTransformPoint(GameController.Instance.Player1.transform.position);
+                    if (!inversedPush)
+                    {
+                        if (relativeTargetPosition.x > 0.0f)
+                            GameController.Instance.Player1.GetComponent<PlayerController>().Rb.AddForce(GameController.Instance.Player1.transform.right * pushForce, ForceMode.Impulse);
+                        else
+                            GameController.Instance.Player1.GetComponent<PlayerController>().Rb.AddForce(-GameController.Instance.Player1.transform.right * pushForce, ForceMode.Impulse);
+                    }
                     else
-                        GameController.Instance.Player1.GetComponent<PlayerController>().Rb.AddForce(GameController.Instance.Player1.transform.right * pushForce, ForceMode.Impulse);
-                }
-            }
-            else
-            {
-                relativeTargetPosition = transform.InverseTransformPoint(GameController.Instance.Player1.transform.position);
-                if (!inversedPush)
-                {
-                    if (relativeTargetPosition.x > 0.0f)
-                        GameController.Instance.Player1.GetComponent<PlayerController>().Rb.AddForce(GameController.Instance.Player1.transform.right * pushForce, ForceMode.Impulse);
-                    else
-                        GameController.Instance.Player1.GetComponent<PlayerController>().Rb.AddForce(-GameController.Instance.Player1.transform.right * pushForce, ForceMode.Impulse);
-                }
-                else
-                {
-                    if (relativeTargetPosition.x > 0.0f)
-                        GameController.Instance.Player2.GetComponent<PlayerController>().Rb.AddForce(-GameController.Instance.Player2.transform.right * pushForce, ForceMode.Impulse);
-                    else
-                        GameController.Instance.Player2.GetComponent<PlayerController>().Rb.AddForce(GameController.Instance.Player2.transform.right * pushForce, ForceMode.Impulse);
+                    {
+                        if (relativeTargetPosition.x > 0.0f)
+                            GameController.Instance.Player2.GetComponent<PlayerController>().Rb.AddForce(-GameController.Instance.Player2.transform.right * pushForce, ForceMode.Impulse);
+                        else
+                            GameController.Instance.Player2.GetComponent<PlayerController>().Rb.AddForce(GameController.Instance.Player2.transform.right * pushForce, ForceMode.Impulse);
+                    }
                 }
             }
         }
@@ -212,15 +215,17 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.tag == "Ground")
+        if(other.gameObject.layer == LayerMask.NameToLayer("World"))
         {
             isGrounded = true;
-            lastPlatform = other.gameObject;
+            if(other.gameObject.tag == "Ground")
+                lastPlatform = other.gameObject;
+
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Ground")
+        if (other.gameObject.layer == LayerMask.NameToLayer("World"))
         {
             isGrounded = false;
         }
