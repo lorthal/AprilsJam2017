@@ -56,11 +56,7 @@ public class PseudoMapGenerator : MonoBehaviour
                 lastLosingPlayerPlatformNumber = GameController.Instance.Player2.GetComponent<PlayerController>().lastPlatformNumber;
             }
         }
-
-        if (GameController.Instance.Player1 == null || GameController.Instance.Player2 == null)
-        {
-            SwapToBreakingPads();
-        }
+        
 
         if (map != null)
         {
