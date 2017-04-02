@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4445577131188768}
   - component: {fileID: 114664308042551258}
+  - component: {fileID: 114662812070035356}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -40,6 +41,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114662812070035356
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1623130980194948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b848dc997ec9784e831d03fa07688e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114664308042551258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -61,5 +73,5 @@ MonoBehaviour:
     type: 2}
   player2CamPrefab: {fileID: 1740677701976502, guid: 7128e81abc10a9f4dbb8cb1e95634fab,
     type: 2}
-  camerasHeight: 5
-  camerasDistance: 10
+  camerasHeight: 6
+  camerasDistance: 12

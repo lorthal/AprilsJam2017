@@ -772,16 +772,6 @@ Prefab:
       propertyPath: player2Spawn
       value: 
       objectReference: {fileID: 1322459561}
-    - target: {fileID: 114664308042551258, guid: 0e3515a835548dd4497fadbc21463d54,
-        type: 2}
-      propertyPath: camerasHeight
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114664308042551258, guid: 0e3515a835548dd4497fadbc21463d54,
-        type: 2}
-      propertyPath: camerasDistance
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0e3515a835548dd4497fadbc21463d54, type: 2}
   m_IsPrefabParent: 0
@@ -1014,22 +1004,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1349016986 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1623130980194948, guid: 0e3515a835548dd4497fadbc21463d54,
-    type: 2}
-  m_PrefabInternal: {fileID: 1237660330}
---- !u!114 &1349016987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1349016986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b848dc997ec9784e831d03fa07688e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1561146781
 GameObject:
   m_ObjectHideFlags: 0
