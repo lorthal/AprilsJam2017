@@ -432,6 +432,7 @@ GameObject:
   - component: {fileID: 23151818900631224}
   - component: {fileID: 114851954896141106}
   - component: {fileID: 54273440441585672}
+  - component: {fileID: 136985461109208596}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player
@@ -1422,7 +1423,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1581720169106998}
-  m_LocalRotation: {x: 0.63331723, y: -0.020542705, z: -0.29077095, w: 0.71689576}
+  m_LocalRotation: {x: 0.6333173, y: -0.020542707, z: -0.29077098, w: 0.7168958}
   m_LocalPosition: {x: -0.3806181, y: -0.610594, z: -0.040834427}
   m_LocalScale: {x: 0.057902038, y: 0.05236982, z: 0.041637197}
   m_Children: []
@@ -2182,6 +2183,19 @@ MonoBehaviour:
   controllsSensitivity: 1
   inversedPush: 0
   lastPlatformNumber: 0
+--- !u!136 &136985461109208596
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1534268072168154}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!137 &137038634315155688
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
