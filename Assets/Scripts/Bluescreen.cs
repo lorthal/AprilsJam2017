@@ -48,6 +48,7 @@ public class Bluescreen : MonoBehaviour
         yield return new WaitForSeconds(delayBeforeBluescreen);
         trollViolet.SetActive(false);
         trollWhite.SetActive(false);
+        FindObjectOfType<SoundButton>().soundButton.gameObject.SetActive(false);
         bluescreenBG.SetActive(true);
     }
 }
