@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114927410224665606}
   - component: {fileID: 114689213586578460}
   - component: {fileID: 65077276210830534}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d196a72ea98e3494fb667a7141a083e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakTime: 0.1
+  breakTime: 0.0001
 --- !u!114 &114927410224665606
 MonoBehaviour:
   m_ObjectHideFlags: 1
