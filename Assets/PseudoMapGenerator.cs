@@ -19,6 +19,10 @@ public class PseudoMapGenerator : MonoBehaviour
     List<UnityEngine.Object[]> map;
     List<UnityEngine.Object[]> wallMap;
 
+    GameObject wallPrefab;
+    GameObject trollPadPrefab;
+    GameObject extraPrefab;
+
     void Start()
     {
         width = 9;
@@ -29,6 +33,7 @@ public class PseudoMapGenerator : MonoBehaviour
         map = new List<UnityEngine.Object[]>();
         wallMap = new List<UnityEngine.Object[]>();
         pseudoRandom = new System.Random(seed.GetHashCode());
+
 
         GenerateSolidRow();
         for (int i = 0; i < 50; i++)
@@ -51,11 +56,7 @@ public class PseudoMapGenerator : MonoBehaviour
                 lastLosingPlayerPlatformNumber = GameController.Instance.Player2.GetComponent<PlayerController>().lastPlatformNumber;
             }
         }
-
-        //if(GameController.Instance.Player1 == null || GameController.Instance.Player2)
-        //{
-        //    SwapToBreakingPads();
-        //}
+        
 
         if (map != null)
         {
@@ -196,11 +197,9 @@ public class PseudoMapGenerator : MonoBehaviour
         {
             for(int row = 0; row < width; row++)
             {
-                if(rows[row] != null)
+                if(rows[row].GetComponent<BreakingController>() == null)
                 {
-                    GameObject temp = rows[row];
-                    rows[row] = (GameObject)Instantiate(Resources.Load("DisapearingPad"), temp.gameObject.transform.position, temp.gameObject.transform.rotation);
-                    Destroy(temp);
+                    rows[row].AddComponent<BreakingController>();
                 }
             }
         }
