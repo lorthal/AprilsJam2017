@@ -52,6 +52,10 @@ public class PseudoMapGenerator : MonoBehaviour
             }
         }
 
+        //if(GameController.Instance.Player1 == null || GameController.Instance.Player2)
+        //{
+        //    SwapToBreakingPads();
+        //}
 
         if (map != null)
         {
@@ -88,7 +92,13 @@ public class PseudoMapGenerator : MonoBehaviour
             if (pseudoRandom.Next(0, 100) > 25)
                 row[rand] = (GameObject)Instantiate(Resources.Load("TrollPad"), Vector3.zero, Quaternion.identity);
             else
-                row[rand] = (GameObject)Instantiate(Resources.Load("DisapearingPad"), Vector3.zero, Quaternion.identity);
+            {
+                if(pseudoRandom.Next(0,2) == 0)
+                    row[rand] = (GameObject)Instantiate(Resources.Load("DisapearingPad"), Vector3.zero, Quaternion.identity);
+                else
+                    row[rand] = (GameObject)Instantiate(Resources.Load("BreakingPad"), Vector3.zero, Quaternion.identity);
+            }
+
             ((GameObject)row[rand]).GetComponent<TrollPad>().Length = currentRowCount;
             ((GameObject)row[rand]).GetComponent<TrollPad>().Row = rand;
         }
@@ -98,7 +108,13 @@ public class PseudoMapGenerator : MonoBehaviour
             if (pseudoRandom.Next(0, 100) > 25)
                 row[rand] = (GameObject)Instantiate(Resources.Load("TrollPad"), Vector3.zero, Quaternion.identity);
             else
-                row[rand] = (GameObject)Instantiate(Resources.Load("DisapearingPad"), Vector3.zero, Quaternion.identity);
+            {
+                if(pseudoRandom.Next(0,2) == 0)
+                    row[rand] = (GameObject)Instantiate(Resources.Load("DisapearingPad"), Vector3.zero, Quaternion.identity);
+                else
+                    row[rand] = (GameObject)Instantiate(Resources.Load("BreakingPad"), Vector3.zero, Quaternion.identity);
+            }
+
             ((GameObject)row[rand]).GetComponent<TrollPad>().Length = currentRowCount;
             ((GameObject)row[rand]).GetComponent<TrollPad>().Row = rand;
         }
@@ -172,6 +188,22 @@ public class PseudoMapGenerator : MonoBehaviour
             map.RemoveAt(0);
         }
 
+    }
+
+    void SwapToBreakingPads()
+    {
+        foreach (GameObject[] rows in map)
+        {
+            for(int row = 0; row < width; row++)
+            {
+                if(rows[row] != null)
+                {
+                    GameObject temp = rows[row];
+                    rows[row] = (GameObject)Instantiate(Resources.Load("DisapearingPad"), temp.gameObject.transform.position, temp.gameObject.transform.rotation);
+                    Destroy(temp);
+                }
+            }
+        }
     }
 
 }
