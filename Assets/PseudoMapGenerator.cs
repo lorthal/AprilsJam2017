@@ -106,14 +106,14 @@ public class PseudoMapGenerator : MonoBehaviour
         if (pseudoRandom.Next(0, 100) < chanceToSpawnPad)
         {
             int rand = pseudoRandom.Next(width / 2 + 1, width - 1);
-            if (pseudoRandom.Next(0, 100) > 25)
+            if (pseudoRandom.Next(0, 100) > 30)
                 row[rand] = (GameObject)Instantiate(Resources.Load("TrollPad"), Vector3.zero, Quaternion.identity);
             else
             {
-                if(pseudoRandom.Next(0,2) == 0)
-                    row[rand] = (GameObject)Instantiate(Resources.Load("DisapearingPad"), Vector3.zero, Quaternion.identity);
-                else
+                if(pseudoRandom.Next(0,15) > 3)
                     row[rand] = (GameObject)Instantiate(Resources.Load("BreakingPad"), Vector3.zero, Quaternion.identity);
+                else
+                    row[rand] = (GameObject)Instantiate(Resources.Load("DisapearingPad"), Vector3.zero, Quaternion.identity);
             }
 
             ((GameObject)row[rand]).GetComponent<TrollPad>().Length = currentRowCount;
