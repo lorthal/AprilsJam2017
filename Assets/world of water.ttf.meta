@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: b2ee95721171b054d8fde2cb898472da
+timeCreated: 1491097186
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: World of Water
+  fontNames:
+  - World of Water
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
