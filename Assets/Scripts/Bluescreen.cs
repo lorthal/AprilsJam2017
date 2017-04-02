@@ -9,6 +9,9 @@ public class Bluescreen : MonoBehaviour
     public GameObject bluescreenBG;
     public float delayBeforeBluescreen = 5.0f;
     private bool bluescreenEnabled;
+    public GameObject trollWhite;
+    public GameObject trollViolet;
+    private ScoreController scoreController;
 
     private void Start()
     {
@@ -20,7 +23,14 @@ public class Bluescreen : MonoBehaviour
         if(GameController.Instance.Player1 == null && GameController.Instance.Player2 == null)
         {
             if (!bluescreenEnabled)
+            {
+                scoreController = FindObjectOfType<ScoreController>();
+                if (int.Parse(scoreController.player1Score.text) > int.Parse(scoreController.player2Score.text))
+                    trollViolet.SetActive(true);
+                else
+                    trollWhite.SetActive(true);
                 StartCoroutine("DisplayBluescreen");
+            }
             else
             {
                 if (Input.GetKeyDown(KeyCode.R))
@@ -36,6 +46,8 @@ public class Bluescreen : MonoBehaviour
     {
         bluescreenEnabled = true;
         yield return new WaitForSeconds(delayBeforeBluescreen);
+        trollViolet.SetActive(false);
+        trollWhite.SetActive(false);
         bluescreenBG.SetActive(true);
     }
 }
