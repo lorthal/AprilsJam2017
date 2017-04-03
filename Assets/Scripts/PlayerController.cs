@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour {
 
     #region Bonuses fields
     public bool inversedControlls;
+    private bool isSlidingForward;
+    private bool isSlidingBack;
+    private bool isSlidingLeft;
+    private bool isSlidingRight;
     private bool slideControlls;
     public bool SlideControlls
     {
@@ -47,17 +51,19 @@ public class PlayerController : MonoBehaviour {
     public GameObject lastPlatform { get; private set; }
     public int lastPlatformNumber;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
         Rb = GetComponent<Rigidbody>();
         isGrounded = true;
+        isSlidingForward = false;
+        slideControlls = false;
         pushUsed = false;
         inversedPush = false;
         pushSound = GetComponent<AudioSource>();
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    // Update is called once per frame
+    void FixedUpdate() {
         if (Player1)
             Player1Input();
         else
@@ -68,32 +74,45 @@ public class PlayerController : MonoBehaviour {
     {
         Vector3 vel = new Vector3();
 
-        if(slideControlls && isGrounded && vel.z <= maxHorizontal)
-            vel += transform.forward * speedHorizontal * controllsSensitivity;
-
-        if (Input.GetKey(KeyCode.UpArrow) && vel.z <= maxHorizontal)
+        if ((Input.GetKey(KeyCode.UpArrow) || isSlidingForward) && vel.z <= maxHorizontal)
         {
+            if(slideControlls && isGrounded && !isSlidingForward)
+            {
+                StartCoroutine("SlideForwardForSeconds");
+            }
             if (!inversedControlls)
                 vel += transform.forward * speedHorizontal * controllsSensitivity;
             else
                 vel -= transform.forward * speedHorizontal;
         }
-        if (Input.GetKey(KeyCode.DownArrow) && vel.z >= -maxHorizontal && !slideControlls)
+        if ((Input.GetKey(KeyCode.DownArrow) || isSlidingBack) && vel.z >= -maxHorizontal)
         {
+            if (slideControlls && isGrounded && !isSlidingBack)
+            {
+                StartCoroutine("SlideBackForSeconds");
+            }
             if (!inversedControlls)
                 vel -= transform.forward * speedHorizontal * controllsSensitivity;
             else
                 vel += transform.forward * speedHorizontal;
         }
-        if (Input.GetKey(KeyCode.LeftArrow) && vel.x <= maxVertical)
+        if ((Input.GetKey(KeyCode.LeftArrow) || isSlidingLeft) && vel.x <= maxVertical)
         {
+            if (slideControlls && isGrounded && !isSlidingLeft)
+            {
+                StartCoroutine("SlideLeftForSeconds");
+            }
             if (!inversedControlls)
                 vel -= transform.right * speedVertical * controllsSensitivity;
             else
                 vel += transform.right * speedVertical;
         }
-        if (Input.GetKey(KeyCode.RightArrow) && vel.x >= -maxVertical)
+        if ((Input.GetKey(KeyCode.RightArrow) || isSlidingRight) && vel.x >= -maxVertical)
         {
+            if (slideControlls && isGrounded && !isSlidingRight)
+            {
+                StartCoroutine("SlideRightForSeconds");
+            }
             if (!inversedControlls)
                 vel += transform.right * speedVertical * controllsSensitivity;
             else
@@ -117,32 +136,46 @@ public class PlayerController : MonoBehaviour {
     void Player2Input()
     {
         Vector3 vel = new Vector3();
-        if (slideControlls && isGrounded && vel.z <= maxHorizontal)
-            vel += transform.forward * speedHorizontal * controllsSensitivity;
 
-        if ((Input.GetKey(KeyCode.W) || (Input.GetAxis("VerticalJoystick") > 0.0f)) && vel.z <= maxHorizontal)
+        if ((Input.GetKey(KeyCode.W) || (Input.GetAxis("VerticalJoystick") > 0.0f) || isSlidingForward) && vel.z <= maxHorizontal)
         {
+            if (slideControlls && isGrounded && !isSlidingForward)
+            {
+                StartCoroutine("SlideForwardForSeconds");
+            }
             if (!inversedControlls)
                 vel += transform.forward * speedHorizontal * controllsSensitivity;
             else
                 vel -= transform.forward * speedHorizontal;
         }
-        if ((Input.GetKey(KeyCode.S) || Input.GetAxis("VerticalJoystick") < 0.0f) && vel.z >= -maxHorizontal && !slideControlls)
+        if ((Input.GetKey(KeyCode.S) || (Input.GetAxis("VerticalJoystick") < 0.0f) || isSlidingBack) && vel.z >= -maxHorizontal)
         {
+            if (slideControlls && isGrounded && !isSlidingBack)
+            {
+                StartCoroutine("SlideBackForSeconds");
+            }
             if (!inversedControlls)
                 vel -= transform.forward * speedHorizontal * controllsSensitivity;
             else
                 vel += transform.forward * speedHorizontal;
         }
-        if ((Input.GetKey(KeyCode.A) || Input.GetAxis("HorizontalJoystick") < 0.0f) && vel.x <= maxVertical)
+        if ((Input.GetKey(KeyCode.A) || (Input.GetAxis("HorizontalJoystick") < 0.0f) || isSlidingLeft) && vel.x <= maxVertical)
         {
+            if (slideControlls && isGrounded && !isSlidingLeft)
+            {
+                StartCoroutine("SlideLeftForSeconds");
+            }
             if (!inversedControlls)
                 vel -= transform.right * speedVertical * controllsSensitivity;
             else
                 vel += transform.right * speedVertical;
         }
-        if ((Input.GetKey(KeyCode.D) || Input.GetAxis("HorizontalJoystick") > 0.0f) && vel.x >= -maxVertical)
+        if ((Input.GetKey(KeyCode.D) || (Input.GetAxis("HorizontalJoystick") > 0.0f) || isSlidingRight) && vel.x >= -maxVertical)
         {
+            if (slideControlls && isGrounded && !isSlidingRight)
+            {
+                StartCoroutine("SlideRightForSeconds");
+            }
             if (!inversedControlls)
                 vel += transform.right * speedVertical * controllsSensitivity;
             else
@@ -211,6 +244,34 @@ public class PlayerController : MonoBehaviour {
         }
         yield return new WaitForSeconds(pushCooldown);
         pushUsed = false;
+    }
+
+    private IEnumerator SlideForwardForSeconds()
+    {
+        isSlidingForward = true;
+        yield return new WaitForSeconds(1.0f);
+        isSlidingForward = false;
+    }
+
+    private IEnumerator SlideBackForSeconds()
+    {
+        isSlidingBack = true;
+        yield return new WaitForSeconds(1.0f);
+        isSlidingBack = false;
+    }
+
+    private IEnumerator SlideLeftForSeconds()
+    {
+        isSlidingLeft = true;
+        yield return new WaitForSeconds(1.0f);
+        isSlidingLeft = false;
+    }
+
+    private IEnumerator SlideRightForSeconds()
+    {
+        isSlidingRight = true;
+        yield return new WaitForSeconds(1.0f);
+        isSlidingRight = false;
     }
 
     private void OnTriggerStay(Collider other)

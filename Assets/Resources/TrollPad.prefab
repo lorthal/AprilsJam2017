@@ -25,7 +25,6 @@ GameObject:
   - component: {fileID: 114280288964752900}
   - component: {fileID: 65397342257353378}
   - component: {fileID: 65892497128076410}
-  - component: {fileID: 114011714971091734}
   - component: {fileID: 114535573780014724}
   m_Layer: 8
   m_Name: TrollPad
@@ -126,19 +125,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114011714971091734
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1696018633983326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76870e5c1b500af4884c89db9c2c978d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animClip: {fileID: 7400000, guid: 69ae95d9ce5241542b99e2b3b02d854c, type: 2}
-  anim: {fileID: 0}
 --- !u!114 &114280288964752900
 MonoBehaviour:
   m_ObjectHideFlags: 1

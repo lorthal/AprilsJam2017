@@ -52,6 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bonusIconMaterial: {fileID: 2100000, guid: cd0b107e606e63e489b2099bf585ce20, type: 2}
-  boxPrefab: {fileID: 1696018633983326, guid: b4f81a47007e42d4198518623073b090, type: 2}
+  boxPrefab: {fileID: 1696018633983326, guid: c4e6f497560053f418cb92be82b1a450, type: 2}
   wallVerticalOffset: 1
   wallHorizontalOffset: 10

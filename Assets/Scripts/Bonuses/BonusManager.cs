@@ -34,7 +34,6 @@ public class BonusManager : MonoBehaviour
         bonusIcon.GetComponentInChildren<Renderer>().material = currentBonus.bonusIconMaterial;
         bonusIcon.GetComponentInChildren<ParticleSystem>().Play();
         StartCoroutine("StartRotatingBonusIconWithDelay");
-        Debug.Log(currentBonus.gameObject.name);
         switch (playerSelected)
         {
             case Randomizer.PlayerSelection.Player1: currentBonus.Activate(GameController.Instance.Player1); break;
