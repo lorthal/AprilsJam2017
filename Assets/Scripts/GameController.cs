@@ -29,4 +29,10 @@ public class GameController : MonoBehaviour
         player2Cam = Instantiate(player2CamPrefab, player2CamSpawnPosition, Quaternion.identity);
         player2Cam.GetComponent<CameraFollow>().player = Player2;
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+    }
 }
