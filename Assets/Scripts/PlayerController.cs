@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour {
     {
         Vector3 vel = new Vector3();
 
-        if ((Input.GetKey(KeyCode.UpArrow) || (Input.GetAxis("VerticalJoystick2") > 0.0f) || isSlidingForward) && vel.z <= maxHorizontal)
+        if ((Input.GetKey(KeyCode.UpArrow) || (Input.GetAxis("Joystick2Vertical") > 0.0f) || isSlidingForward) && vel.z <= maxHorizontal)
         {
             if(slideControlls && isGrounded && !isSlidingForward)
             {
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour {
             else
                 vel -= transform.forward * speedHorizontal;
         }
-        if ((Input.GetKey(KeyCode.DownArrow) || (Input.GetAxis("VerticalJoystick2") < 0.0f) || isSlidingBack) && vel.z >= -maxHorizontal)
+        if ((Input.GetKey(KeyCode.DownArrow) || (Input.GetAxis("Joystick2Vertical") < 0.0f) || isSlidingBack) && vel.z >= -maxHorizontal)
         {
             if (slideControlls && isGrounded && !isSlidingBack)
             {
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour {
             else
                 vel += transform.forward * speedHorizontal;
         }
-        if ((Input.GetKey(KeyCode.LeftArrow) || (Input.GetAxis("HorizontalJoystick2") < 0.0f) || isSlidingLeft) && vel.x <= maxVertical)
+        if ((Input.GetKey(KeyCode.LeftArrow) || (Input.GetAxis("Joystick2Horizontal") < 0.0f) || isSlidingLeft) && vel.x <= maxVertical)
         {
             if (slideControlls && isGrounded && !isSlidingLeft)
             {
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour {
             else
                 vel += transform.right * speedVertical;
         }
-        if ((Input.GetKey(KeyCode.RightArrow) || (Input.GetAxis("HorizontalJoystick2") > 0.0f) || isSlidingRight) && vel.x >= -maxVertical)
+        if ((Input.GetKey(KeyCode.RightArrow) || (Input.GetAxis("Joystick2Horizontal") > 0.0f) || isSlidingRight) && vel.x >= -maxVertical)
         {
             if (slideControlls && isGrounded && !isSlidingRight)
             {
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour {
                 vel -= transform.right * speedVertical;
         }
 
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick2Button0)) && isGrounded)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Joystick2Jump")) && isGrounded)
         {
             Rb.AddForce(transform.up * jumpForce);
         }
@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour {
             Rb.velocity = new Vector3(0, Rb.velocity.y, 0);
 
 
-        if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.Joystick2Button1)) && !pushUsed)
+        if ((Input.GetKey(KeyCode.LeftControl) || Input.GetButtonDown("Joystick2Attack")) && !pushUsed)
             StartCoroutine("PushSecondPlayer");
     }
 
@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour {
     {
         Vector3 vel = new Vector3();
 
-        if ((Input.GetKey(KeyCode.W) || (Input.GetAxis("VerticalJoystick1") > 0.0f) || isSlidingForward) && vel.z <= maxHorizontal)
+        if ((Input.GetKey(KeyCode.W) || (Input.GetAxis("Joystick1Vertical") > 0.0f) || isSlidingForward) && vel.z <= maxHorizontal)
         {
             if (slideControlls && isGrounded && !isSlidingForward)
             {
@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour {
             else
                 vel -= transform.forward * speedHorizontal;
         }
-        if ((Input.GetKey(KeyCode.S) || (Input.GetAxis("VerticalJoystick1") < 0.0f) || isSlidingBack) && vel.z >= -maxHorizontal)
+        if ((Input.GetKey(KeyCode.S) || (Input.GetAxis("Joystick1Vertical") < 0.0f) || isSlidingBack) && vel.z >= -maxHorizontal)
         {
             if (slideControlls && isGrounded && !isSlidingBack)
             {
@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour {
             else
                 vel += transform.forward * speedHorizontal;
         }
-        if ((Input.GetKey(KeyCode.A) || (Input.GetAxis("HorizontalJoystick1") < 0.0f) || isSlidingLeft) && vel.x <= maxVertical)
+        if ((Input.GetKey(KeyCode.A) || (Input.GetAxis("Joystick1Horizontal") < 0.0f) || isSlidingLeft) && vel.x <= maxVertical)
         {
             if (slideControlls && isGrounded && !isSlidingLeft)
             {
@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour {
             else
                 vel += transform.right * speedVertical;
         }
-        if ((Input.GetKey(KeyCode.D) || (Input.GetAxis("HorizontalJoystick1") > 0.0f) || isSlidingRight) && vel.x >= -maxVertical)
+        if ((Input.GetKey(KeyCode.D) || (Input.GetAxis("Joystick1Horizontal") > 0.0f) || isSlidingRight) && vel.x >= -maxVertical)
         {
             if (slideControlls && isGrounded && !isSlidingRight)
             {
@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour {
                 vel -= transform.right * speedVertical;
         }
 
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.Joystick1Button0)) && isGrounded)
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetButtonDown("Joystick1Jump")) && isGrounded)
         {
             Rb.AddForce(transform.up * jumpForce);
         }
@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour {
         else
             Rb.velocity = new Vector3(0, Rb.velocity.y, 0);
 
-        if ((Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Joystick1Button1)) && !pushUsed)
+        if ((Input.GetKey(KeyCode.E) || Input.GetButtonDown("Joystick1Attack")) && !pushUsed)
             StartCoroutine("PushSecondPlayer");
     }
 
