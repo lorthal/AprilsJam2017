@@ -15,6 +15,14 @@ public class Menu : MonoBehaviour
         exitButton.onClick.AddListener(OnExitButtonClick);
     }
 
+    private void Update()
+    {
+        if (Input.GetButtonDown("Start"))
+            OnStartButtonClick();
+        if (Input.GetButtonDown("Exit"))
+            OnExitButtonClick();
+    }
+
     private void OnStartButtonClick()
     {
         SceneManager.LoadScene("main");
